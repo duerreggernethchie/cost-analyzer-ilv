@@ -1,14 +1,79 @@
----
-layout: home
-search_exclude: true
----
-
-This site is built with [fastpages](https://github.com/fastai/fastpages), An easy to use blogging platform with extra features for Jupyter Notebooks.
-
-![]({{site.baseurl}}/images/diagram.png "https://github.com/fastai/fastpages")
-
-[fastpages](https://github.com/fastai/fastpages) automates the process of creating blog posts via GitHub Actions, so you don't have to fuss with conversion scripts.  A full list of features can be found on [GitHub](https://github.com/fastai/fastpages).  
-
-You can edit the `index.html` file to change this content.
-
-# Posts
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CSV Insurance Cost Analyzer App</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <div class="sujet"></div>
+        <div class="page">
+            <div class="container">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">CSV Insurance Cost Analyzer App</h4>
+                    <h5 class="card-title">A Data Science Software Development Project and Portfolios</h5>
+                    <p class="card-text">
+                        Our motivation of this project is to give an overview of different areas of Software Development in Data Science with the help of the CSV Insurance Cost Analyzer. We covered Requirements Engineering, Software Architecture....
+                    </p>
+                  </div>
+                </div>
+                <div class="card mt-3">
+                  <div class="card-body">
+                    <h4 class="card-title">Cost Analyser Application -- System and Software Architecture</h4>
+                    <img src="./Architecture/image/Architektur_Modell.png" class="card-img">
+                    <div class="card-text">
+                      <h5>Welche Architektur würden Sie wählen, warum?</h5>
+                      <p>
+                        Wir haben uns für die Microservice Architecture entschieden. Wir glauben, dass diese Architektur ihren Zweck bei unserer Anwendung gut erfüllen kann und ist darüber hinaus sehr übersichtlich. Wie man es der oberen Abbildung entnehmen kann ist unser Architektur sehr einfach, wir wollen mit unserer Anwendung im Prinzip zwei Services dem Kunden anbieten, einmal ist es die Möglichkeit seine Geldbewegungen von verschiedenen Banken in einem Ort strukturiert zu speichern und darüber hinaus wollen wir ihr/ihm anbieten diese Daten auf einer einfache und effektive Art auszuwerten (Uploading Services +Anlaytical Services). Wir glauben, dass für diese Ziele die dargestellte Microservice Architektur gut geeignet ist.
+                      </p>
+                      <h5>Welche Art von Schnittstellen wären notwendig? Welche denkbar? Welche möglich?</h5>
+                      <p>
+                        Für unseren Projekt haben wir uns entschieden für die REST API Schnitstelle. Alternativ könnte man SOAP und WDL wählen. Die Nutzung von Rest-API bietet die Möglichkeit eine sehr hohe Skalierbarkeit zu erreichen, da Client und Server voneinander entfernt sind.  Ein weitere Vorteil von Rest-API besteht darin, dass man es einfacher in vorhandener Website integrieren kann ohne die Webseite-Infrastruktur zu verändern.
+                      </p>
+                      <h5>Wie können Sie „Messaging" nutzen?</h5>
+                      <p>
+                        Man könnte zum Beispiel das asynchrone Messaging nutzen, bei den Analytischen Anwendungen und zwar so, dass der Kunde nue Analyse anfordert, die es benötigt ein komplexeres Modell zu trainieren und die Anfrage wird zuerst in „Que“ gespeichert und zu einem günstigen Zeitpunkt umgesetzt.
+                      </p>
+                      <h5>Welche Informationen können Sie aus „Log"-Dateien extrahieren?</h5>
+                      <p>
+                        In unserem Anwendungsbeispiel würden wir gerne die Zeitstempeln von den Uploads, den Banknamen, den Usernamen extrahieren. Darüber hinaus sollen jeglicher Art von Fehler die während der Benutzung der App aufgetreten sind protokoliert werden. Des weiteren sollen die TimeStamps protokolliert werden wann der Kunde eine Anfrage anfragte und wann er die Antwort erhalten hat. Wir würden auch gerne die Zeit, die der Kunde jedes Mail in der App verweilt aus den „Log“-Dateien ablesen und wie oft er die App benutzt.
+                      </p>
+                      <h5>Wie könnten Sie über „Internationalisierung stolpern" --(nicht nur Kunden aus diversen Ländern)?</h5>
+                      <p>
+                        Wir gehen davon aus, dass wir nicht über die Internationalisierung stolpern werden , da unsere Requirements präzise definiert sind.
+                      </p>
+                      <p>
+                        Theoretisch könnte man sich folgende Probleme vorstellen (Wir gehen zuerst davon aus, dass unsere App nur in dem deutschsprachigen Raum und in GB + USA zur Verfügung stehen wird);
+                      </p>
+                      <p>
+                        Folgende Issues können zu Problemen führen:
+                      </p>
+                      <ul>
+                          <li>verschiedene rechtliche Anforderungen in den jeweiligen Ländern;</li>
+                          <li>verschiedene Währungen;</li>
+                          <li>verschiedene Zeitzonen;</li>
+                          <li>Metrische Systeme sind unterschiedlich- Formatierung!;</li>
+                          <li>verschiedene Buchstaben, Umlaute;</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Project by  Christian Brandl | Tomasz Jendrzyca | Zelenne Huhn | Markus Auer | Nethchie Dürregger
+                    </div>
+                    <div class="col-sm-6 text-right">
+                       Software Development for Data Science Lab
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
