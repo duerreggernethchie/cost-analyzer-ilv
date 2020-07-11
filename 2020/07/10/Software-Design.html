@@ -1,0 +1,219 @@
+<h1 id="cost-analyser-application--software-design">Cost Analyser Application – Software Design</h1>
+
+<p>[TOC]</p>
+
+<h2 id="development-model">Development Model</h2>
+
+<p>We will use as development waterfall model the development cycle to improve and ensure software quality. Following image will show the phases of the model:</p>
+
+<p><img src="./media/ca_dev_cycle.png" alt="ca_dev_cycle" style="zoom:50%;" /></p>
+
+<p><strong>1. Planning</strong>
+This phase will define the main goal of the development:</p>
+
+<ul>
+  <li>Setting a goal</li>
+  <li>Planning a budget</li>
+  <li>Finding the right resources to begin (developers, materials)</li>
+  <li>Scheduling</li>
+</ul>
+
+<p>This phase in the cycle will require a lot of communication between the development and the stakeholder(s).</p>
+
+<p><strong>2. Requirements /Analysis</strong>
+This is one of the most most important steps in the cycle. The project management team must communicate with the development team. The project management team gets  the requirements from the stakeholders. State of the art is an agile development modus.. Agile methods like Design Thinking may produce a backlog of tasks to be performed.</p>
+
+<p><strong>3. Design</strong>
+After the requirements are discussed, agreed upon and understood the next step is for the architects of the project. The design phase requires consistency, this is why developers use frameworks! Developers will use design patterns to solve algorithmic problems. The design phase should be documented so the developers know exactly what design patterns they want to use, and where they want to use them.</p>
+
+<p><strong>4. Implementation</strong>
+This phase produces the software. Agile development is very helpful because it helps organize development goals in a timely manner using “<strong>Sprints</strong>”.  The project management team or the product owner should be heavily involved with this phase to ensure all expectations are met by the development team.</p>
+
+<p><strong>5. Testing</strong>
+One of the most  important steps in the lifecycle of software development. This phase ensures that you know if your software is of quality to deploy. Testing will help measure a number of things:</p>
+<ul>
+  <li>Code quality</li>
+  <li>Unit testing (functional tests)</li>
+  <li>Integration testing</li>
+  <li>Performance testing</li>
+  <li>Security testing</li>
+</ul>
+
+<p><strong>6. Deployment</strong>
+We will using pipelines to automate deploy the software as soon as an issue is closed (feature deployment). This will give all of the users the “finished” product until bugs are found which leads us to our next phase.</p>
+
+<p><strong>7. Maintenance</strong>
+Bugs will be the biggest issue in this phase. Users will report them and it is up to the development team to fix anything that is lowering the functionality of the software. For new features we will start again with step/phase 1.</p>
+
+<h2 id="system-architecture">System architecture</h2>
+<p>More information about the system you can find on the document <a href="../Architecture/Cost Analyser Application - System and Software Architecture.md">Cost Analyser Application – System and software Architecture </a> and for Data Science in the document <a href="../Architecture/Data_Science_Architektur.md">Cost Analyser Application – Data Science Architecture </a></p>
+
+<h2 id="design-patterns">Design Patterns</h2>
+
+<p>Following design patterns will be used in our software:</p>
+
+<h3 id="command-pattern">Command Pattern</h3>
+
+<p><strong>Command</strong> is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you parameterize methods with different requests, delay or queue a request’s execution, and support undoable operations.</p>
+
+<p><strong>Transactional behavior:</strong> Database engine or csv upload process may keep a list of operations that have been or will be performed. If one of them fails, all others can be reversed or discarded (usually called <em>rollback</em>). For example, if two database tables that refer to each other must be updated, and the second update fails, the transaction can be rolled back, so that the first table does not now contain an invalid reference.</p>
+
+<p><strong>GUI buttons and menu items:</strong> In the ability to perform the desired command, an “Action” may have an associated icon, keyboard shortcut, tooltip text, and so on. A toolbar button or menu item component may be completely initialized using only the Action object.</p>
+
+<h3 id="bridge-pattern">Bridge Pattern</h3>
+
+<ul>
+  <li>An abstraction and its implementation should be defined and extended independently from each other.</li>
+  <li>A compile-time binding between an abstraction and its implementation should be avoided so that an implementation can be selected at run-time.</li>
+</ul>
+
+<p>For defining the mapping of our bank accounts it is necessary to have an “Abstraction” of a standard bank account to its “Implementors” like Hypo or Volksbank</p>
+
+<h3 id="decorator-pattern">Decorator Pattern</h3>
+
+<p>The decorator pattern can be used to extend (decorate) the functionality of a certain object statically, or in some cases at run-time, independently of other instances of the same class, provided some groundwork is done at design time. This is achieved by designing a new <em>Decorator</em> class that wraps the original class.</p>
+
+<p>In the Cost Analyser Application we will use the Decorator Pattern also in the implementation of bank accounts and for logging within our functions.</p>
+
+<h2 id="api">API</h2>
+
+<p>An API is the base of all the apps that deal with data or enable communication between two products or services. We will empower our apps and UIs to other mobile application or platform to share its data with our or their apps/platforms. It will ease the user experience without involving the developers.</p>
+
+<p>In the future, we want to provide our service also to other tools to integrate it.</p>
+
+<h3 id="main-features-of-our-api">Main features of our API:</h3>
+
+<ul>
+  <li><strong>Search by criteria</strong>: The API will let the users search data based on different criteria, like a date or shop name.</li>
+  <li><strong>Paging</strong>: Many times, it happens that we do not want to see the complete data changed, but just a glimpse of it. In such a scenario, the API should be capable of determining how much data to display in one go and at what frequency. It should also inform the user about the no. of pages of data remaining.</li>
+  <li><strong>Sorting</strong>: To ensure that the user receives all the pages of data one-by-one, the API should empower the users to sort data as per the time of modification or some other condition.</li>
+  <li><strong>JSON Support/ REST</strong>: The REST APIs are stateless, light-weighted and let you retry the upload mobile app process if it fails. Besides, JSON’s syntax resembles that of most of the programming languages, which make it easy for a mobile app developer to parse it into any other language.</li>
+  <li><strong>Authorization via OAuth</strong>: It is again necessary that your API authorizes via OAuth since it is faster than other methods – you just need to click on a button and it’s done.</li>
+  <li><strong>Use Throttling</strong>: App Throttling is needed for redirecting overflow of traffic, backup APIs and safeguarding it from DoS (Denial of Service) attacks.</li>
+</ul>
+
+<h3 id="http-errors">HTTP Errors</h3>
+
+<p>Our API must be able to handle all kind of requests and return errors in as descriptive and standard form. The following are the default HTTP error codes we will use:</p>
+
+<ul>
+  <li>200 - Generic everything is OK.</li>
+  <li>201 - Created something OK.</li>
+  <li>202 - Accepted but is being processed a sync (power off, provisioning, etc.).</li>
+  <li>400 - Bad Request (invalid syntax).</li>
+  <li>401 - Unauthorized (no current user and there should be).</li>
+  <li>403 - The current user is forbidden from accessing this data.</li>
+  <li>404 - That URL is not a valid route, or the item resource does not exist.</li>
+  <li>410 – Data is deleted or doesn’t exist.</li>
+  <li>405 - Method Not Allowed (calling post method when only get is allowed, etc.).</li>
+  <li>500 – API internal error.</li>
+  <li>503 - System is in maintenance mode.</li>
+</ul>
+
+<h3 id="api-endpoints">API Endpoints:</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Method</strong></th>
+      <th><strong>Description</strong></th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>Used to retrieve a representation of a resource.</td>
+      <td>GET stored data by date, shop</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>Used to create new new resources and sub-resources</td>
+      <td>POST new CSV file to upload a new bank export</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>Used to update existing resources</td>
+      <td>PUT to update an already uploaded bank export</td>
+    </tr>
+    <tr>
+      <td>PATCH</td>
+      <td>Used to update existing resources</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>Used to delete existing resources</td>
+      <td>Delete one or more entries</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="testing">Testing</h2>
+
+<h3 id="characteristics-of-a-banking-application">Characteristics of a Banking Application</h3>
+
+<p>Before we begin testing, it’s important to note the standard features expected of any banking/finance application. A standard banking application should meet all these characteristics as mentioned below.</p>
+
+<ul>
+  <li>Support thousands of concurrent user sessions</li>
+  <li>Integration with numerous bank accounts</li>
+  <li>Process fast and secure</li>
+  <li>Include massive storage system.</li>
+  <li>To troubleshoot customer issues, it should have high auditing/logging capability</li>
+  <li>Support users on multiple platforms (Mac, Linux, Unix, Windows, mobile devices)</li>
+  <li>Support users from multiple locations</li>
+  <li>Support multi-lingual users</li>
+  <li>Support multiple service sectors (Loans, Retail banking etc.)</li>
+  <li>Foolproof disaster management mechanism</li>
+</ul>
+
+<h3 id="test-phases">Test Phases</h3>
+
+<p><strong>Requirement Review:</strong> Quality analysts, PO, and development leads are involved in this task. The requirements document is reviewed and cross-checked to ensure that it does not affect the workflow</p>
+
+<p><strong>Database Testing:</strong> Important part of our finance application testing. This testing is done to ensure data integrity, data loading, data migration, stored procedures, and functions validation, rules testing, etc.</p>
+
+<p><strong>Integration Testing:</strong> Test that all components that are developed are integrated and validated</p>
+
+<p><strong>Functional Testing:</strong> The usual software testing activities like Test Cases. A Test Case will review and test an execution and is done during this phase</p>
+
+<p><strong>Security Testing:</strong> It ensures that the software does not have any security flaws. During test preparation, QA team needs to include both negative as well as positive test scenarios so as to break into the system and report it before any unauthorized individual access it. For Security Testing, automation tools are used while for Manual Testing tools like Proxy Sniffer, Paros proxy, HTTP watch, etc. are used</p>
+
+<p><strong>Usability Testing:</strong> It ensures that different people will be able to use the system as normal user and don’t affect the other users performance or stability.</p>
+
+<p><strong>User Acceptance Testing:</strong> It is the final stage of testing done by the end users to ensure the compliance of the application with the real world scenario.</p>
+
+<h3 id="sample-test-cases">Sample Test Cases</h3>
+
+<h4 id="admin-test-cases">Admin Test Cases:</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Verify Admin login with valid and Invalid data
+- Verify admin login without data
+- Verify all admin home links
+- Verify admin change password with valid and invalid data
+- Verify admin change password without data
+- Verify admin change password with existing data
+- Verify admin logout
+</code></pre></div></div>
+
+<h4 id="for-users">For Users:</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Verify all links
+- Verify customers login with valid and invalid data
+- Verify customers login without data
+- Verify csv upload with and without data
+- Verify csv upload with valid or invalid data
+</code></pre></div></div>
+
+<h3 id="for-new-users">For new Users</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Create a new user with valid and invalid data
+- Create a new user without data
+- Verify cancel and reset option
+- Update user with valid and invalid data
+- Update user with existing data
+- Verify cancel option
+- Verify deletion of the user
+</code></pre></div></div>
+
