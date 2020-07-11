@@ -25,12 +25,29 @@ Web basics was as well easy to follow. These concepts or words are to all known 
 
 Software Architecture and design are without a doubt key in every software development project. These can be so complicated that without specialists or a good project management, such a project can be a disaster.
 
-## Nethchie 
-### Summary 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Nethchie Dürregger
+
+### Summary: 
+
+The software development course is by far the most challenging subject for me but at the same time also the most fullfilling so far. I have always been scared about 
+it before having close to zero knowledge of programming and development. There are lot of terms and technologies that i did not know they exist, i did not know what 
+it is for and did not know how to apply. It's a good feeling realizing that there are so much more to learn everyday. Although the learning process can be very 
+frustrating, atleast i feel very frustrated quite lot of times when i do not understand the topic or things are not working that i even find myself staring at my device for a minute 
+or two clicking the mouse anywhere while feeling lost not only once but many times.
+But thanks for all the provided articles and tutorials, they really guide me through solving problems like debugging code etc. It is fullfilling for many reasons. 
+Not only that i learn lot of things, lot of new technologies, but the thought that I together with my team are brainstorming concepts and developing an app. 
+It's a dream come true. I have daydreamed before how software developers make people's live easier. Although i do not see myself into this direction just yet because 
+i still need to learn lot of things but getting there as i am learning everyday. 
+
+I also would also like to highlight the teamwork. The course does not only teach me technical skills but also soft skill. The idea of having a team realy molded me 
+into a great teamplayer. It is embarassing to admit that i am not good at asking for help (maybe because in the environment where i am moving, there is an unbalance give and take) 
+Self-reliance is all i know. With all the challenges i have encountered in software development,  i have started to ask for help from my team and others and started to exchange ideas on what is best for our project. 
+Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their help to the struggling student like myself.
 
 ### Discussion 
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Tomasz
 ### Summary:
@@ -55,7 +72,7 @@ It was very helpfull that we have  in the group collegues with much more expieri
 
 So after the course I have the feeling to learned some important and interesting concepts. I think I can connect them and tell why they matters and build with them some theoretical solutions. For me even more chellanging is the application of this concepts (LAB).   
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ## Christian
@@ -64,6 +81,7 @@ So after the course I have the feeling to learned some important and interesting
 
 ### Discussion: 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Markus
 
