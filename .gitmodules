@@ -1,0 +1,3 @@
+[submodule "csv-cost-analyser-app-ilv"]
+	path = csv-cost-analyser-app-ilv
+	url = https://gitlab.web.fh-kufstein.ac.at/christian.brandl/csv-cost-analyser-app-ilv
