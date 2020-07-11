@@ -10,7 +10,8 @@
 
 We will use as development waterfall model the development cycle to improve and ensure software quality. Following image will show the phases of the model:
 
-<img src="./media/ca_dev_cycle.png" alt="ca_dev_cycle" style="zoom:50%;" />
+
+![dashboard](/cost-analyzer-ilv/images/ca_dev_cycle.png)
 
 **1. Planning**
 This phase will define the main goal of the development:
