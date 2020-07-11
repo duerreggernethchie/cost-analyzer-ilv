@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/" rel="alternate" type="text/html" /><updated>2020-07-11T14:39:32-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml</id><title type="html">fastpages</title><subtitle>An easy to use blogging platform with support for Jupyter Notebooks.</subtitle><entry><title type="html">Lessons_learned_and_discussion</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/11/Lessons_learned_and_discussion.html" rel="alternate" type="text/html" title="Lessons_learned_and_discussion" /><published>2020-07-11T00:00:00-05:00</published><updated>2020-07-11T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/11/Lessons_learned_and_discussion</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/11/Lessons_learned_and_discussion.html">&lt;h1 id=&quot;lessons-learned-and-discussion&quot;&gt;Lessons learned and discussion&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/" rel="alternate" type="text/html" /><updated>2020-07-11T16:17:56-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml</id><title type="html">fastpages</title><subtitle>An easy to use blogging platform with support for Jupyter Notebooks.</subtitle><entry><title type="html">Lessons_learned_and_discussion</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/11/Lessons_learned_and_discussion.html" rel="alternate" type="text/html" title="Lessons_learned_and_discussion" /><published>2020-07-11T00:00:00-05:00</published><updated>2020-07-11T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/11/Lessons_learned_and_discussion</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/11/Lessons_learned_and_discussion.html">&lt;h1 id=&quot;lessons-learned-and-discussion&quot;&gt;Lessons learned and discussion&lt;/h1&gt;
 
 &lt;h2 id=&quot;zelenne-huhn&quot;&gt;Zelenne Huhn&lt;/h2&gt;
 
@@ -231,13 +231,11 @@ Bugs will be the biggest issue in this phase. Users will report them and it is u
 
 &lt;h2 id=&quot;business-goals-of-the-software&quot;&gt;Business Goals of the Software&lt;/h2&gt;
 
-&lt;p&gt;The Cost Analyser application is able to help user track his bank account’s expenditures and receivables. A user will get an overview of all his expenses over several bank accounts by uploading his CSV exports. The CSV exports are downloaded from his bank accounts. The tool is able to show a dashboard with an overview of all the clustered categories (or an individual category). The user is able to filter by date and categories.&lt;/p&gt;
+&lt;p&gt;The Cost Analyser application is able to help user track his bank account’s expenditures and receivables. A user will get an overview of all his expenses over several bank accounts by uploading his CSV exports. The CSV exports are downloaded from his bank accounts. The tool is able to show a dashboard with an overview of all the clustered categories (or an individual category) where the use can have an overview of his expenses. Of course the user is also able to filter by date and categories.&lt;/p&gt;
 
-&lt;p&gt;Figure 1: Draft of the dashboard shows a first PoC of the dashboard. Every user could have several bank accounts. As an example, the dashboard shows an account from Hypotirol, Sparkasse and Anglo Austrian Bank. Every bank account on the application shows a summary of the expenditure, receivables and balance through a line graph (line graph shows only last 3 to 6 months). However, if the user will click either button expenditure, receivable, the user has the chance to see a daily, monthly and yearly overview. And the graph next to it shows the cluster of categories (for expenditure for example: shelter, food, clothing, USAW). The very left graph shows the user’s total balance of all his bank accounts.&lt;/p&gt;
+&lt;p&gt;Figure 1: Draft of the dashboard shows a first PoC of the dashboard. Every user could have several bank accounts. As an example, the dashboard shows an account from Hypotirol, Sparkasse and Anglo Austrian Bank. Every bank account on the application shows a summary of the expenditure, receivables and balance through a line graph (line graph shows only last 3 to 6 months). However, if the user will click either button expenditure, receivable, the user has the chance to see a daily, monthly and yearly overview. And the graph next to it shows the cluster of categories (for expenditure for example: shelter, food, clothing, USW). The very left graph shows the user’s total balance of all his bank accounts.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/cost-analyzer-ilv/images/bank_dashboard.JPG&quot; alt=&quot;dashboard&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Figure 1: Sample Dashboard&lt;/p&gt;
 
 &lt;h2 id=&quot;main-requirements&quot;&gt;Main Requirements&lt;/h2&gt;
 
@@ -482,9 +480,13 @@ Bugs will be the biggest issue in this phase. Users will report them and it is u
   &lt;li&gt;The data which will be saved in our DB, must be able to be exported anonym to banks for example in order to perform machine learning analysis.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;model-the-central-elements-using-suitable-uml-diagrams&quot;&gt;Model the central elements using suitable UML diagrams&lt;/h2&gt;
+&lt;h2 id=&quot;modelling-central-elements-through-uml-diagrams&quot;&gt;MODELLING CENTRAL ELEMENTS THROUGH UML-DIAGRAMS&lt;/h2&gt;
 
-&lt;p&gt;At present, here is the idea of the application design through an UML diagram.&lt;/p&gt;
+&lt;p&gt;At present, here is the idea of the application design through the help of different UML diagrams.&lt;/p&gt;
+
+&lt;h4 id=&quot;figure-2-class-diagram&quot;&gt;Figure 2: Class-Diagram&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/cost-analyzer-ilv/images/class_diagram.JPG&quot; alt=&quot;dashboard&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -501,11 +503,46 @@ Bugs will be the biggest issue in this phase. Users will report them and it is u
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;To do: We can maybe add Dashboard Class if you like the idea of having a dashboard. A class for Clustering based machine learning algorithm.&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&quot;figure-3-sequence-diagram&quot;&gt;Figure 3: Sequence-Diagram&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/cost-analyzer-ilv/images/sequence_diagram.JPG&quot; alt=&quot;dashboard&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;./media/re_uml-diagram.png&quot; alt=&quot;re_uml-diagram&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The user uploads the bank CSV-file&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The bank informaton gets extracted  into the system&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Then it gets configuration of the bank CSV file based on the IBAN&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The bank information gets structured because every bank has different header name and it is ordered differently&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The CSV mapping contains the information which columns have to be used to fill the fields in the standardized format&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The information from the CSV gets parsed and stored into the cashbook&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Figure 2: UML diagram&lt;/p&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – Requirements Engineering</summary></entry><entry><title type="html">Requirements evolution</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements-Evolution.html" rel="alternate" type="text/html" title="Requirements evolution" /><published>2020-07-09T00:00:00-05:00</published><updated>2020-07-09T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements%20Evolution</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements-Evolution.html">&lt;h1 id=&quot;cost-analyser-application--requirements-evolution&quot;&gt;Cost Analyser Application – Requirements Evolution&lt;/h1&gt;
+&lt;h4 id=&quot;figure-4-activity-diagram&quot;&gt;Figure 4: Activity-Diagram&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/cost-analyzer-ilv/images/activity_diagram.JPG&quot; alt=&quot;dashboard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This would be the activity of the Cost-Analyser App&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The user’s bank CSV export is uploaded into the system&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It loads bank configs&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If the user’s CSV-file can parse, then it parses the bank data and it displays the Cashbook.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – Requirements Engineering</summary></entry><entry><title type="html">Requirements evolution</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements-Evolution.html" rel="alternate" type="text/html" title="Requirements evolution" /><published>2020-07-09T00:00:00-05:00</published><updated>2020-07-09T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements%20Evolution</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements-Evolution.html">&lt;h1 id=&quot;cost-analyser-application--requirements-evolution&quot;&gt;Cost Analyser Application – Requirements Evolution&lt;/h1&gt;
 
 &lt;p&gt;[TOC]&lt;/p&gt;
 
