@@ -12,7 +12,7 @@ The Cost Analyser application is able to help user track his bank account's expe
 
 Figure 1: Draft of the dashboard shows a first PoC of the dashboard. Every user could have several bank accounts. As an example, the dashboard shows an account from Hypotirol, Sparkasse and Anglo Austrian Bank. Every bank account on the application shows a summary of the expenditure, receivables and balance through a line graph (line graph shows only last 3 to 6 months). However, if the user will click either button expenditure, receivable, the user has the chance to see a daily, monthly and yearly overview. And the graph next to it shows the cluster of categories (for expenditure for example: shelter, food, clothing, USAW). The very left graph shows the user's total balance of all his bank accounts. 
 
-![dashboard](./images/dashboard.png)
+![dashboard](/images/dashboard.png)
 
 Figure 1: Sample Dashboard
 
