@@ -5,7 +5,8 @@
 
 **Entwickeln Sie ein einfaches Architekturmodell für Ihren UseCase!**
 
-![Architekturmodell](./image/Architektur_Modell.png)
+
+![Architekturmodell](/cost-analyzer-ilv/images/Architektur_Modell.png)
 
 
 **Welche Architektur würden Sie wählen, warum?**
