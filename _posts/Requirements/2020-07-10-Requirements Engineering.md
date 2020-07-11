@@ -8,13 +8,11 @@
 
 ## Business Goals of the Software
 
-The Cost Analyser application is able to help user track his bank account's expenditures and receivables. A user will get an overview of all his expenses over several bank accounts by uploading his CSV exports. The CSV exports are downloaded from his bank accounts. The tool is able to show a dashboard with an overview of all the clustered categories (or an individual category). The user is able to filter by date and categories.
+The Cost Analyser application is able to help user track his bank account's expenditures and receivables. A user will get an overview of all his expenses over several bank accounts by uploading his CSV exports. The CSV exports are downloaded from his bank accounts. The tool is able to show a dashboard with an overview of all the clustered categories (or an individual category) where the use can have an overview of his expenses. Of course the user is also able to filter by date and categories.
 
-Figure 1: Draft of the dashboard shows a first PoC of the dashboard. Every user could have several bank accounts. As an example, the dashboard shows an account from Hypotirol, Sparkasse and Anglo Austrian Bank. Every bank account on the application shows a summary of the expenditure, receivables and balance through a line graph (line graph shows only last 3 to 6 months). However, if the user will click either button expenditure, receivable, the user has the chance to see a daily, monthly and yearly overview. And the graph next to it shows the cluster of categories (for expenditure for example: shelter, food, clothing, USAW). The very left graph shows the user's total balance of all his bank accounts. 
+Figure 1: Draft of the dashboard shows a first PoC of the dashboard. Every user could have several bank accounts. As an example, the dashboard shows an account from Hypotirol, Sparkasse and Anglo Austrian Bank. Every bank account on the application shows a summary of the expenditure, receivables and balance through a line graph (line graph shows only last 3 to 6 months). However, if the user will click either button expenditure, receivable, the user has the chance to see a daily, monthly and yearly overview. And the graph next to it shows the cluster of categories (for expenditure for example: shelter, food, clothing, USW). The very left graph shows the user's total balance of all his bank accounts. 
 
 ![dashboard](/cost-analyzer-ilv/images/bank_dashboard.JPG)
-
-Figure 1: Sample Dashboard
 
 
 
@@ -162,9 +160,13 @@ Like shown in Figure 1: Draft of the dashboard, a dashboard with following chart
 
 -   The data which will be saved in our DB, must be able to be exported anonym to banks for example in order to perform machine learning analysis.
 
-## Model the central elements using suitable UML diagrams
+## MODELLING CENTRAL ELEMENTS THROUGH UML-DIAGRAMS
 
-At present, here is the idea of the application design through an UML diagram.
+At present, here is the idea of the application design through the help of different UML diagrams.
+
+#### Figure 2: Class-Diagram 
+
+![dashboard](/cost-analyzer-ilv/images/class_diagram.JPG)
 
 -   The application reads the bank account CSV file specified in the FileReader Class
 
@@ -174,8 +176,28 @@ At present, here is the idea of the application design through an UML diagram.
 
 -   Finally, it calculates balance based on expenditure/receivable transactions
 
-*To do: We can maybe add Dashboard Class if you like the idea of having a dashboard. A class for Clustering based machine learning algorithm.*
+#### Figure 3: Sequence-Diagram 
+![dashboard](/cost-analyzer-ilv/images/sequence_diagram.JPG)
 
-![re_uml-diagram](./media/re_uml-diagram.png)
+-   The user uploads the bank CSV-file
 
-Figure 2: UML diagram
+-   The bank informaton gets extracted  into the system
+
+-   Then it gets configuration of the bank CSV file based on the IBAN
+
+-   The bank information gets structured because every bank has different header name and it is ordered differently
+
+-   The CSV mapping contains the information which columns have to be used to fill the fields in the standardized format
+
+-   The information from the CSV gets parsed and stored into the cashbook
+
+#### Figure 4: Activity-Diagram 
+![dashboard](/cost-analyzer-ilv/images/activity_diagram.JPG)
+
+This would be the activity of the Cost-Analyser App
+
+-  The user's bank CSV export is uploaded into the system
+
+-  It loads bank configs
+
+-  If the user's CSV-file can parse, then it parses the bank data and it displays the Cashbook.
