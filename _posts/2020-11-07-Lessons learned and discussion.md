@@ -43,9 +43,14 @@ i still need to learn lot of things but getting there as i am learning everyday.
 I also would also like to highlight the teamwork. The course does not only teach me technical skills but also soft skill. The idea of having a team realy molded me 
 into a great teamplayer. It is embarassing to admit that i am not good at asking for help (maybe because in the environment where i am moving, there is an unbalance give and take) 
 Self-reliance is all i know. With all the challenges i have encountered in software development,  i have started to ask for help from my team and others and started to exchange ideas on what is best for our project. 
-Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their help to the struggling student like myself.
+Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their help to the struggling but interested to learn students. 
 
-### Discussion 
+### Discussion:
+
+As almost everything is new to me, it is interesting to know and learn not only the requirements engineering, but also  design and architectural part of developing
+a software, i find very complicated to understand in the beginning 
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +84,18 @@ So after the course I have the feeling to learned some important and interesting
 
 ### Summary: 
 
-### Discussion: 
+It was very interesting to work on this project *Cost Analyser App* to create more requirements and generate insights on new features. Basically I have already heard everything from the lecture, but often had no time to have a deeper look. To work in a heterogeneous team is very nice, because it get input from different sites. The Lab for Software Development was very challenging, time consuming, but very interesting to work with all the topics from the ILV. Designing a software is alway a very nice work and it would be possible to even find much more topic to specify in this project and for the *Cost Analyser*. Due to that we worked already a lot in the Lab we decided to have a focus on the theoretical parts of designing and architecting a software. 
+
+We had a very good communication via Teams and Whats-App. We started working on Word and PPT documents, until we realized to provide the results via a GitLab. Therefore we switched to the GitLab repository https://gitlab.web.fh-kufstein.ac.at/christian.brandl/csv-cost-analyser-app-ilv/ and used also tickets to structure the goals and asign the tasks to different persons in the team. This worked out very well.
+
+### Lessons Learned and Discussion
+
+From the theory it was very useful to get an update on design patterns with good examples. This topic is always very difficult to understand and bring it then into real world scenarios. 
+
+After the course I have got an update of important and interesting modern concepts. The project was very useful for persons new to this topic to get a fast overview of the needed tasks to specify a software development project for developers and also get an overview of the needed roles of a project team. For me it was a very good summary and reminder on modern architecture and also to use this again in my daily business. 
+
+The big lesson learned for me was to get an update on best practice software design with modern tools. Best thinks for me where **Data Science Architektures** and working with Pipelines. This is a very interesting topic for me and I am looking forward to use this more in practice. Also **Container, Kuberenets and Cloud** is something a modern software developer has to know.  
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
