@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/" rel="alternate" type="text/html" /><updated>2020-07-12T08:37:59-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml</id><title type="html">fastpages</title><subtitle>An easy to use blogging platform with support for Jupyter Notebooks.</subtitle><entry><title type="html">Lessons learned and discussion</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/11/07/Lessons-learned-and-discussion.html" rel="alternate" type="text/html" title="Lessons learned and discussion" /><published>2020-11-07T00:00:00-06:00</published><updated>2020-11-07T00:00:00-06:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/11/07/Lessons%20learned%20and%20discussion</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/11/07/Lessons-learned-and-discussion.html">&lt;h1 id=&quot;lessons-learned-and-discussion&quot;&gt;Lessons learned and discussion&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/" rel="alternate" type="text/html" /><updated>2020-07-12T16:57:53-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/feed.xml</id><title type="html">fastpages</title><subtitle>An easy to use blogging platform with support for Jupyter Notebooks.</subtitle><entry><title type="html">Lessons learned and discussion</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/11/07/Lessons-learned-and-discussion.html" rel="alternate" type="text/html" title="Lessons learned and discussion" /><published>2020-11-07T00:00:00-06:00</published><updated>2020-11-07T00:00:00-06:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/11/07/Lessons%20learned%20and%20discussion</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/11/07/Lessons-learned-and-discussion.html">&lt;h1 id=&quot;lessons-learned-and-discussion&quot;&gt;Lessons learned and discussion&lt;/h1&gt;
 
 &lt;h2 id=&quot;zelenne-huhn&quot;&gt;Zelenne Huhn&lt;/h2&gt;
 
-&lt;h3 id=&quot;summary&quot;&gt;Summary:&lt;/h3&gt;
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
 
 &lt;p&gt;This course (ILV and LAB) was for me for sure the most difficult so far in the master and overall in my studies. It was at times very frustrating to pay all my attention and having the feeling of not understanding anything.&lt;/p&gt;
 
@@ -16,7 +16,7 @@
 
 &lt;p&gt;For me is clear that this course would have been way easier if I would have knowledge of programming, not just the basics. For this reason, during the summer of 2020 I will invest a lot of time learning python.&lt;/p&gt;
 
-&lt;h3 id=&quot;discussion&quot;&gt;Discussion:&lt;/h3&gt;
+&lt;h3 id=&quot;discussion&quot;&gt;Discussion&lt;/h3&gt;
 
 &lt;p&gt;Requirements engineering was for me the easiest part from this course. I’ve done this for the company I work for and even if we did this as good as we could, we had to do a lot of changes. A system should be adapting itself to the new environments the whole time. As well, it is very complicated to be able to see every single detail when a tool doesn’t exist yet.&lt;/p&gt;
 
@@ -24,53 +24,51 @@
 
 &lt;p&gt;Software Architecture and design are without a doubt key in every software development project. These can be so complicated that without specialists or a good project management, such a project can be a disaster.&lt;/p&gt;
 
-&lt;hr /&gt;
 &lt;h2 id=&quot;nethchie-dürregger&quot;&gt;Nethchie Dürregger&lt;/h2&gt;
 
 &lt;h3 id=&quot;summary-1&quot;&gt;Summary:&lt;/h3&gt;
 
 &lt;p&gt;The software development course is by far the most challenging subject for me but at the same time also the most fullfilling so far. I have always been scared about 
 it before having close to zero knowledge of programming and development. There are lot of terms and technologies that i did not know they exist, i did not know what 
-it is for and did not know how to apply. It’s a good feeling realizing that there are so much more to learn everyday. Although the learning process can be very 
+it is for and did not know how to apply. It’s a great realizing that there are so much more to learn everyday. Although the learning process can be very 
 frustrating, atleast i feel very frustrated quite lot of times when i do not understand the topic or things are not working that i even find myself staring at my device for a minute 
 or two clicking the mouse anywhere while feeling lost not only once but many times.
 But thanks for all the provided articles and tutorials, they really guide me through solving problems like debugging code etc. It is fullfilling for many reasons. 
 Not only that i learn lot of things, lot of new technologies, but the thought that I together with my team are brainstorming concepts and developing an app. 
-It’s a dream come true. I have daydreamed before how software developers make people’s live easier. Although i do not see myself into this direction just yet because 
-i still need to learn lot of things but getting there as i am learning everyday.&lt;/p&gt;
+It’s a dream come true. Although i do not see myself into this direction just yet because i still need to learn lot of things but getting there as i am learning everyday.&lt;/p&gt;
 
 &lt;p&gt;I also would also like to highlight the teamwork. The course does not only teach me technical skills but also soft skill. The idea of having a team realy molded me 
 into a great teamplayer. It is embarassing to admit that i am not good at asking for help (maybe because in the environment where i am moving, there is an unbalance give and take) 
-Self-reliance is all i know. With all the challenges i have encountered in software development,  i have started to ask for help from my team and others and started to exchange ideas on what is best for our project.
+Self-reliance is all i know. With all the challenges i have encountered in software development,  i learned to ask for help from my team and others and started exchanging ideas on what is best for our project/portfolios.
 My team is great. We mostly communicate via teams and whatsapp. We work well together. Helping each other for the success of the project concept and implementation.
 Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their helping hand to the struggling but interested to learn students.&lt;/p&gt;
 
 &lt;h3 id=&quot;discussion-1&quot;&gt;Discussion:&lt;/h3&gt;
 
 &lt;p&gt;As almost everything is new to me, it is interesting to know and learn not only the requirements engineering, but also  design and architectural part of developing
-a software, i have to admit that i find it very complicated to understand in the beginning but once i delve myself into it and thorough understanding it, I am now able to 
-create different UML diagrams by connecting relationships of the central elements of the system, and planning of how an application could look like in a dashboard and all the needed requirements. 
-Of course there’s a lot of rooms for improvement but getting there slowly. I also like the web basics, playing around with HTML and as well as deploying our artifacts online and creating Pipeline and app deployment in the kubernetes cloud. 
-I was very curious before about how could i deploy my own data science educational blogs that i wrote while learning for my easy access when i need it. Knowingly it is possible through githubs fastpages or gitlab pages.&lt;/p&gt;
+a software, i have to admit that i find it very complicated to understand in the beginning but once i dig myself into it and thorough understanding it, I am now able to 
+create different UML diagrams to show relationships of the central elements of the system, and planning of how an application could look like in a dashboard and all the needed requirements. 
+Of course there’s a lot of rooms for improvement but getting there slowly. I like the web basics as well, playing around with HTML and as well as deploying our portfolios online. I also like continuous integration, delivery and
+deployment because it allows me to integrate small pieces of code at one time, failures are detected faster and can be repaired faster, and cotinuous testing my code if the outputs are correct. 
+The app depployment in the kubernetes cloud is a challenging and interesting for me as well.  I was very curious before about how could i deploy my own data science educational blogs that i wrote while learning, for my easy access when i need it. Great to know it is possible through githubs fastpages or gitlab pages.
+During the summer break, it is my goal to create my own app for practice purpose and be more confident with software development.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;h2 id=&quot;tomasz-jendrzyca&quot;&gt;Tomasz Jendrzyca&lt;/h2&gt;
+&lt;h3 id=&quot;summary-2&quot;&gt;Summary&lt;/h3&gt;
 
-&lt;h2 id=&quot;tomasz&quot;&gt;Tomasz&lt;/h2&gt;
-&lt;h3 id=&quot;summary-2&quot;&gt;Summary:&lt;/h3&gt;
+&lt;p&gt;Software development is for me the hardest and mostly misterious area from our Data Science studies (at least in the first 2 semesters), so to be honest I had some fear regarding this project. Thanks to my collegues and they support it was possible to create this project and to contribute to it to some extend.&lt;/p&gt;
 
-&lt;p&gt;Software development is for me the hardest and mostly mysterious area from our Data Science studies (at least in the first 2 semesters), so to be honest I had some fear regarding this project. Thanks to my collegues and they support it was possible to create this project and to contribute to it to some extend.&lt;/p&gt;
+&lt;p&gt;The idea of our project is to build a Cost analyser application. I will not concentrate here on the details which can be found in the documents we created and shared for this project. In this summary I would like to describe the lessons learned and discuss our results and the outcome of the course from my point of view.&lt;/p&gt;
 
-&lt;p&gt;The idea of our project is to build an Cost analyzer application. I will not concentrate here on the details which can be found in the documents we created and shared for this project. In this summary I would like to describe the lessons learned and discuss our results and the outcome of the course from my point of view.&lt;/p&gt;
+&lt;h3 id=&quot;lessons-learned-and-discussion-1&quot;&gt;Lessons Learned and Discussion&lt;/h3&gt;
 
-&lt;h4 id=&quot;lessons-learned-and-discussion-1&quot;&gt;Lessons Learned and Discussion:&lt;/h4&gt;
-
-&lt;p&gt;Requirements Engineering was from my side the easiest part of the course to understand, at least theoretically. The correct and state of the art implementation seems to be already much harder. For somebody, who never wrote such requirements it is hard to decide  what does it mean for instance specific enaugh formulation; for instance this  sentence: “The system will be offering different standard layout according to the preferences of the customers.”  It ist specific enaugh? But how specific should it be? For me here the lesson learned is to think about the rules we have learned one shoud stick to writing the requirements. I think that only after some experience it is possible to do it well.&lt;/p&gt;
+&lt;p&gt;Requirements Engineering was from my side the easiest part of the course to understand, at least theoretically. The correct and state of the art implementation seems to be already much harder. For somebody, who never wrote such requirements it is hard to decide  what does it mean for instance specific enough formulation; for instance this  sentence: “The system will be offering different standard layout according to the preferences of the customers.”  It is specific enough? But how specific should it be? For me here the lesson learned is to think about the rules we have learned one should stick to writing the requirements. I think that only after some experience it is possible to do it well.&lt;/p&gt;
 
 &lt;p&gt;Writing about the architecture was for me an interesting expierience, I have had really no/little understanding about this technical issues and what one has to implement so  that an architecture makes sense and functions well. So I tried to analyse what we have learned during the course ( or what I undestood from it) and I googled so that an architecture could have been  created for our application and at least in my understanding could work well and help to fulfill the requriements of our project. What I could learned from it, is the fact that one has to concentrate on the requirements thinking about an architecture, besides that a lot of ideas and concepts were here new for me and so I had a possibility to learned them also in an application form.&lt;/p&gt;
 
 &lt;p&gt;Similar experience as described above was connected with defining and describing the data science architecture. It was a process of trying to understsand the material from the course and implement it to our application. It was again quite chellanging to think how it could work but also suprisingly quite interesting.&lt;/p&gt;
 
-&lt;p&gt;For me the big lesson learned is that starting doing the projects nothing seems understandable for me and after that I`m still at the bigining but at least I see that it is not everything here a rockest science as it seems before.&lt;/p&gt;
+&lt;p&gt;For me the big lesson learned is that starting doing the projects nothing seems understandable for me and after that I`m still at the beginning but at least I see that it is not everything here a rocket science as it seems before.&lt;/p&gt;
 
 &lt;p&gt;I think that for someone, who has no previous expierience (besides Sofware Development I and Data Engineering) in the topics of Software Development and never worked in this area, the course was quite chellanging, this was my expierience.&lt;/p&gt;
 
@@ -78,11 +76,7 @@ I was very curious before about how could i deploy my own data science education
 
 &lt;p&gt;So after the course I have the feeling to learned some important and interesting concepts. I think I can connect them and tell why they matters and build with them some theoretical solutions. For me even more chellanging is the application of this concepts (LAB).&lt;/p&gt;
 
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;christian&quot;&gt;Christian&lt;/h2&gt;
-
-&lt;h3 id=&quot;summary-3&quot;&gt;Summary:&lt;/h3&gt;
+&lt;h2 id=&quot;christian-brandl&quot;&gt;Christian Brandl&lt;/h2&gt;
 
 &lt;p&gt;It was very interesting to work on this project &lt;em&gt;Cost Analyser App&lt;/em&gt; to create more requirements and generate insights on new features. Basically I have already heard everything from the lecture, but often had no time to have a deeper look. To work in a heterogeneous team is very nice, because it get input from different sites. The Lab for Software Development was very challenging, time consuming, but very interesting to work with all the topics from the ILV. Designing a software is alway a very nice work and it would be possible to even find much more topic to specify in this project and for the &lt;em&gt;Cost Analyser&lt;/em&gt;. Due to that we worked already a lot in the Lab we decided to have a focus on the theoretical parts of designing and architecting a software.&lt;/p&gt;
 
@@ -96,13 +90,21 @@ I was very curious before about how could i deploy my own data science education
 
 &lt;p&gt;The big lesson learned for me was to get an update on best practice software design with modern tools. Best thinks for me where &lt;strong&gt;Data Science Architektures&lt;/strong&gt; and working with Pipelines. This is a very interesting topic for me and I am looking forward to use this more in practice. Also &lt;strong&gt;Container, Kuberenets and Cloud&lt;/strong&gt; is something a modern software developer has to know.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;h2 id=&quot;markus-auer&quot;&gt;Markus Auer&lt;/h2&gt;
 
-&lt;h2 id=&quot;markus&quot;&gt;Markus&lt;/h2&gt;
+&lt;h3 id=&quot;summary-3&quot;&gt;Summary&lt;/h3&gt;
 
-&lt;h3 id=&quot;summary-4&quot;&gt;Summary:&lt;/h3&gt;
+&lt;p&gt;This course was not easy to transfer into the project despite my experiences from several programming and software engineering courses. It is different to the other courses as you can not learn the content to use it like programming in different languages.&lt;/p&gt;
 
-&lt;h3 id=&quot;discussion-2&quot;&gt;Discussion:&lt;/h3&gt;</content><author><name></name></author><summary type="html">Lessons learned and discussion</summary></entry><entry><title type="html">Software design</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/10/Software-Design.html" rel="alternate" type="text/html" title="Software design" /><published>2020-07-10T00:00:00-05:00</published><updated>2020-07-10T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/10/Software%20Design</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/10/Software-Design.html">&lt;h1 id=&quot;cost-analyser-application--software-design&quot;&gt;Cost Analyser Application – Software Design&lt;/h1&gt;
+&lt;p&gt;My strenghts are lying more in the practical part. Taking over the role as a PO in the LAB was good to practice speaking and selling improvements of the progress. The downside was that I was not able to dive into the several new elements we used.&lt;/p&gt;
+
+&lt;p&gt;The part of the web technologies was complete new to me. Seeing what single elements are adding value to the project and how fast they can be used motivates to use them for own projects.&lt;/p&gt;
+
+&lt;h3 id=&quot;lessons-learned-and-discussion-3&quot;&gt;Lessons Learned and Discussion&lt;/h3&gt;
+
+&lt;p&gt;We created a very long list of requirements for a tool that seems simple to describe. Such a length can produce a impression of having a complete list of requirements. Maybe a project should define a milestone where the application is ready to be released not when it is done with all its features. For sure the requirements are changing over the project progress but they can be integrated easier. This leads to a discussion of the kind of project management.&lt;/p&gt;
+
+&lt;p&gt;For me I can say that I now know some of the terms of the daily growing universe. In the first moment I resignated not to understand what Docker, Kubernetes and all other new thing mean in theory. Seeing how they are running makes it much more interesting to work with.&lt;/p&gt;</content><author><name></name></author><summary type="html">Lessons learned and discussion</summary></entry><entry><title type="html">Software design</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/10/Software-Design.html" rel="alternate" type="text/html" title="Software design" /><published>2020-07-10T00:00:00-05:00</published><updated>2020-07-10T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/10/Software%20Design</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/10/Software-Design.html">&lt;h1 id=&quot;cost-analyser-application--software-design&quot;&gt;Cost Analyser Application – Software Design&lt;/h1&gt;
 
 &lt;p&gt;[TOC]&lt;/p&gt;
 
@@ -150,7 +152,7 @@ We will using pipelines to automate deploy the software as soon as an issue is c
 Bugs will be the biggest issue in this phase. Users will report them and it is up to the development team to fix anything that is lowering the functionality of the software. For new features we will start again with step/phase 1.&lt;/p&gt;
 
 &lt;h2 id=&quot;system-architecture&quot;&gt;System architecture&lt;/h2&gt;
-&lt;p&gt;More information about the system you can find on the document &lt;a href=&quot;../Architecture/Cost Analyser Application - System and Software Architecture.md&quot;&gt;Cost Analyser Application – System and software Architecture &lt;/a&gt; and for Data Science in the document &lt;a href=&quot;../Architecture/Data_Science_Architektur.md&quot;&gt;Cost Analyser Application – Data Science Architecture &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;More information about the system you can find on the document &lt;a href=&quot;https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System-and-Software-Architecture.html&quot;&gt;System and software Architecture&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;design-patterns&quot;&gt;Design Patterns&lt;/h2&gt;
 
@@ -636,43 +638,36 @@ Bugs will be the biggest issue in this phase. Users will report them and it is u
   &lt;li&gt;
     &lt;p&gt;If the user’s CSV-file can parse, then it parses the bank data and it displays the Cashbook.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – Requirements Engineering</summary></entry><entry><title type="html">Requirements evolution</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements-Evolution.html" rel="alternate" type="text/html" title="Requirements evolution" /><published>2020-07-09T00:00:00-05:00</published><updated>2020-07-09T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements%20Evolution</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/Requirements-Evolution.html">&lt;h1 id=&quot;cost-analyser-application--requirements-evolution&quot;&gt;Cost Analyser Application – Requirements Evolution&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – Requirements Engineering</summary></entry><entry><title type="html">System and software architecture</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System-and-Software-Architecture.html" rel="alternate" type="text/html" title="System and software architecture" /><published>2020-07-09T00:00:00-05:00</published><updated>2020-07-09T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System%20and%20Software%20Architecture</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System-and-Software-Architecture.html">&lt;h1 id=&quot;cost-analyser-application--system-and-software-architecture&quot;&gt;Cost Analyser Application – System and Software Architecture&lt;/h1&gt;
 
-&lt;p&gt;[TOC]&lt;/p&gt;
-
-&lt;h2 id=&quot;improving-uml-diagram&quot;&gt;Improving UML Diagram&lt;/h2&gt;
-
-&lt;p&gt;I believe our FileReader class should be extended so that it will be able to read different format and not only accepting CSV, or we can create 1 class for for just identifying which format the user is uploading. What do you think?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;./media/re_uml-diagram_v2.png&quot; alt=&quot;re_uml-diagram_v2&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – Requirements Evolution</summary></entry><entry><title type="html">System and software architecture</title><link href="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System-and-Software-Architecture.html" rel="alternate" type="text/html" title="System and software architecture" /><published>2020-07-09T00:00:00-05:00</published><updated>2020-07-09T00:00:00-05:00</updated><id>https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System%20and%20Software%20Architecture</id><content type="html" xml:base="https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System-and-Software-Architecture.html">&lt;h1 id=&quot;cost-analyser-application--system-and-software-architecture&quot;&gt;Cost Analyser Application – System and Software Architecture&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;Entwickeln Sie ein einfaches Architekturmodell für Ihren UseCase!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Develop a simple architecture model for your use case!&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/cost-analyzer-ilv/images/Architektur_Modell.png&quot; alt=&quot;Architekturmodell&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Welche Architektur würden Sie wählen, warum?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Which architecture would you choose and why?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Wir haben uns für die Microservice Architecture entschieden. Wir glauben, dass diese Architektur ihren Zweck bei unserer Anwendung gut erfüllen kann und ist darüber hinaus sehr übersichtlich. Wie man es der oberen Abbildung entnehmen kann ist unser Architektur sehr einfach, wir wollen mit unserer Anwendung im Prinzip zwei Services dem Kunden anbieten, einmal ist es die Möglichkeit seine Geldbewegungen von verschiedenen Banken in einem Ort strukturiert zu speichern und darüber hinaus wollen wir ihr/ihm anbieten diese Daten auf einer einfache und effektive Art auszuwerten (Uploading Services +Anlaytical Services). Wir glauben, dass für diese Ziele die dargestellte Microservice Architektur gut geeignet ist.&lt;/p&gt;
+&lt;p&gt;We decided us for the microservice architecture. We think, that this architecture can deliver desired value for our application. Furthermore they appear to be clear. As you can see in the figure above our architecture is quite simple. We want to offer two services to our customers with our application. First, to show the movements of their money. The second service is the possibility to evaluate his data simple and effektively (uploading services + analytical services). We think that for our goals the shown microservice architecture is suitable.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Welche Art von Schnittstellen wären notwendig? Welche denkbar? Welche möglich?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Which kind of interfaces are neccessary? Which desireable and which possible to implement?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Für unseren Projekt haben wir uns entschieden für die REST API Schnitstelle. Alternativ könnte man SOAP und WDL wählen. Die Nutzung von Rest-API bietet die Möglichkeit eine sehr hohe Skalierbarkeit zu erreichen, da Client und Server voneinander entfernt sind.  Ein weitere Vorteil von Rest-API besteht darin, dass man es einfacher in vorhandener Website integrieren kann ohne die Webseite-Infrastruktur zu verändern.&lt;/p&gt;
+&lt;p&gt;For our project we decided us to use the REST API interface. Alternatively SOAP and WDL can be used. The usage of REST API offers the possibility of a good scalability as client and server are far apart. Another advantage is to integrate is easily into a web site without changing its infrastructure.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Wie können Sie „Messaging” nutzen?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How can we use messaging?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Man könnte zum Beispiel das asynchrone Messaging nutzen, bei den Analytischen Anwendungen und zwar so, dass der Kunde nue Analyse anfordert, die es benötigt ein komplexeres Modell zu trainieren und die Anfrage wird zuerst in „Que“ gespeichert und zu einem günstigen Zeitpunkt umgesetzt.&lt;/p&gt;
+&lt;p&gt;Asynchrone messaging can be used at the analytical applications when a customer requests a new analysis that needs to train a more complex model. This request can be stored in a queue and implemented at a fitting time point.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Welche Informationen können Sie aus „Log”-Dateien extrahieren?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Which information can be extracted out of log files?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;In unserem Anwendungsbeispiel würden wir gerne die Zeitstempeln von den Uploads, den Banknamen, den Usernamen extrahieren. Darüber hinaus sollen jeglicher Art von Fehler die während der Benutzung der App aufgetreten sind protokoliert werden. Des weiteren sollen die TimeStamps protokolliert werden wann der Kunde eine Anfrage anfragte und wann er die Antwort erhalten hat. Wir würden auch gerne die Zeit, die der Kunde jedes Mail in der App verweilt aus den „Log“-Dateien ablesen und wie oft er die App benutzt.&lt;/p&gt;
+&lt;p&gt;In our use case we would like to extract timestamps of uploads, the bank names and from the user using the application. Furthermore all kinds of errors while the usage should be logged. We also need to know by loggin when we receive requests by our customers and the time when he received the answer. Good to know would be also the usage in form of numbers of logins and the duration he spends on the platform.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Wie könnten Sie über „Internationalisierung stolpern” –(nicht nur Kunden aus diversen Ländern)?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How could you stumble over internationalization - Not only because of customers of different countries?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Wir gehen davon aus, dass wir nicht über die Internationalisierung stolpern werden , da unsere Requirements präzise definiert sind.
-Theoretisch könnte man sich folgende Probleme vorstellen (Wir gehen zuerst davon aus, dass unsere App nur in dem deutschsprachigen Raum und in GB + USA zur Verfügung stehen wird);
-Folgende Issues können zu Problemen führen:
-	- verschiedene rechtliche Anforderungen in den jeweiligen Ländern;
-	- verschiedene Währungen;
-	-  verschiedene Zeitzonen; 
-	- Metrische Systeme sind unterschiedlich- Formatierung!;
-	- verschiedene Buchstaben, Umlaute;&lt;/p&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – System and Software Architecture</summary></entry></feed>
+&lt;p&gt;We think that we are prepared well in this topic as our requirements are defined aswell well. Theoretically we can imagine following issues (In the first step our application is avaulable in the DACH area and GB + USA):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Different legal requirements&lt;/li&gt;
+  &lt;li&gt;Different currencies&lt;/li&gt;
+  &lt;li&gt;Different time zones&lt;/li&gt;
+  &lt;li&gt;Metric systems with different formats&lt;/li&gt;
+  &lt;li&gt;unknown letters (wrong character set)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Cost Analyser Application – System and Software Architecture</summary></entry></feed>
