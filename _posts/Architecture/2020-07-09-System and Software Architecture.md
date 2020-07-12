@@ -3,39 +3,34 @@
 
 
 
-**Entwickeln Sie ein einfaches Architekturmodell für Ihren UseCase!**
+**Develop a simple architecture model for your use case!**
 
 
 ![Architekturmodell](/cost-analyzer-ilv/images/Architektur_Modell.png)
 
 
-**Welche Architektur würden Sie wählen, warum?**
+**Which architecture would you choose and why?**
 
-Wir haben uns für die Microservice Architecture entschieden. Wir glauben, dass diese Architektur ihren Zweck bei unserer Anwendung gut erfüllen kann und ist darüber hinaus sehr übersichtlich. Wie man es der oberen Abbildung entnehmen kann ist unser Architektur sehr einfach, wir wollen mit unserer Anwendung im Prinzip zwei Services dem Kunden anbieten, einmal ist es die Möglichkeit seine Geldbewegungen von verschiedenen Banken in einem Ort strukturiert zu speichern und darüber hinaus wollen wir ihr/ihm anbieten diese Daten auf einer einfache und effektive Art auszuwerten (Uploading Services +Anlaytical Services). Wir glauben, dass für diese Ziele die dargestellte Microservice Architektur gut geeignet ist.
+We decided us for the microservice architecture. We think, that this architecture can deliver desired value for our application. Furthermore they appear to be clear. As you can see in the figure above our architecture is quite simple. We want to offer two services to our customers with our application. First, to show the movements of their money. The second service is the possibility to evaluate his data simple and effektively (uploading services + analytical services). We think that for our goals the shown microservice architecture is suitable.
 
-**Welche Art von Schnittstellen wären notwendig? Welche denkbar? Welche möglich?**
+**Which kind of interfaces are neccessary? Which desireable and which possible to implement?**
 
-Für unseren Projekt haben wir uns entschieden für die REST API Schnitstelle. Alternativ könnte man SOAP und WDL wählen. Die Nutzung von Rest-API bietet die Möglichkeit eine sehr hohe Skalierbarkeit zu erreichen, da Client und Server voneinander entfernt sind.  Ein weitere Vorteil von Rest-API besteht darin, dass man es einfacher in vorhandener Website integrieren kann ohne die Webseite-Infrastruktur zu verändern.  
+For our project we decided us to use the REST API interface. Alternatively SOAP and WDL can be used. The usage of REST API offers the possibility of a good scalability as client and server are far apart. Another advantage is to integrate is easily into a web site without changing its infrastructure.
 
+**How can we use messaging?**
 
-**Wie können Sie „Messaging" nutzen?**
+Asynchrone messaging can be used at the analytical applications when a customer requests a new analysis that needs to train a more complex model. This request can be stored in a queue and implemented at a fitting time point.
 
-Man könnte zum Beispiel das asynchrone Messaging nutzen, bei den Analytischen Anwendungen und zwar so, dass der Kunde nue Analyse anfordert, die es benötigt ein komplexeres Modell zu trainieren und die Anfrage wird zuerst in „Que“ gespeichert und zu einem günstigen Zeitpunkt umgesetzt. 
+**Which information can be extracted out of log files?**
 
+In our use case we would like to extract timestamps of uploads, the bank names and from the user using the application. Furthermore all kinds of errors while the usage should be logged. We also need to know by loggin when we receive requests by our customers and the time when he received the answer. Good to know would be also the usage in form of numbers of logins and the duration he spends on the platform.
 
-**Welche Informationen können Sie aus „Log"-Dateien extrahieren?**
+**How could you stumble over internationalization - Not only because of customers of different countries?**
 
-In unserem Anwendungsbeispiel würden wir gerne die Zeitstempeln von den Uploads, den Banknamen, den Usernamen extrahieren. Darüber hinaus sollen jeglicher Art von Fehler die während der Benutzung der App aufgetreten sind protokoliert werden. Des weiteren sollen die TimeStamps protokolliert werden wann der Kunde eine Anfrage anfragte und wann er die Antwort erhalten hat. Wir würden auch gerne die Zeit, die der Kunde jedes Mail in der App verweilt aus den „Log“-Dateien ablesen und wie oft er die App benutzt. 
+We think that we are prepared well in this topic as our requirements are defined aswell well. Theoretically we can imagine following issues (In the first step our application is avaulable in the DACH area and GB + USA):
 
-
-**Wie könnten Sie über „Internationalisierung stolpern" --(nicht nur Kunden aus diversen Ländern)?**
-
-Wir gehen davon aus, dass wir nicht über die Internationalisierung stolpern werden , da unsere Requirements präzise definiert sind.
-Theoretisch könnte man sich folgende Probleme vorstellen (Wir gehen zuerst davon aus, dass unsere App nur in dem deutschsprachigen Raum und in GB + USA zur Verfügung stehen wird);
-Folgende Issues können zu Problemen führen:
-	- verschiedene rechtliche Anforderungen in den jeweiligen Ländern;
-	- verschiedene Währungen;
-	-  verschiedene Zeitzonen; 
-	- Metrische Systeme sind unterschiedlich- Formatierung!;
-	- verschiedene Buchstaben, Umlaute;
-
+- Different legal requirements
+- Different currencies
+- Different time zones
+- Metric systems with different formats
+- unknown letters (wrong character set)

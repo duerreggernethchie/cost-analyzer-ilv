@@ -47,8 +47,7 @@ We will using pipelines to automate deploy the software as soon as an issue is c
 Bugs will be the biggest issue in this phase. Users will report them and it is up to the development team to fix anything that is lowering the functionality of the software. For new features we will start again with step/phase 1.
 
 ## System architecture
-More information about the system you can find on the document [Cost Analyser Application -- System and software Architecture ](../Architecture/Cost Analyser Application - System and Software Architecture.md) and for Data Science in the document [Cost Analyser Application -- Data Science Architecture ](../Architecture/Data_Science_Architektur.md)
-
+More information about the system you can find on the document [System and software Architecture](https://duerreggernethchie.github.io/cost-analyzer-ilv/2020/07/09/System-and-Software-Architecture.html)
 
 
 ## Design Patterns
