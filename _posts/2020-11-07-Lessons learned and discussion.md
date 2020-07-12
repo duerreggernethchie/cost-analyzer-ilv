@@ -42,13 +42,16 @@ i still need to learn lot of things but getting there as i am learning everyday.
 
 I also would also like to highlight the teamwork. The course does not only teach me technical skills but also soft skill. The idea of having a team realy molded me 
 into a great teamplayer. It is embarassing to admit that i am not good at asking for help (maybe because in the environment where i am moving, there is an unbalance give and take) 
-Self-reliance is all i know. With all the challenges i have encountered in software development,  i have started to ask for help from my team and others and started to exchange ideas on what is best for our project. 
-Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their help to the struggling but interested to learn students. 
+Self-reliance is all i know. With all the challenges i have encountered in software development,  i have started to ask for help from my team and others and started to exchange ideas on what is best for our project.
+My team is great. We mostly communicate via teams and whatsapp. We work well together. Helping each other for the success of the project concept and implementation.
+Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their helping hand to the struggling but interested to learn students. 
 
-### Discussion:
+### Discussion: 
 
 As almost everything is new to me, it is interesting to know and learn not only the requirements engineering, but also  design and architectural part of developing
-a software, i find very complicated to understand in the beginning 
+a software, i have to admit that i find it very complicated to understand in the beginning but once i delve myself into it and thorough understanding it, I am now able to 
+create different UML diagrams by connecting relationships of the central elements of the system, and how an application could look like in a dashboard and all the needed requirements. 
+Of course there's a lot of rooms for improvement but getting there slowly. 
 
 
 
