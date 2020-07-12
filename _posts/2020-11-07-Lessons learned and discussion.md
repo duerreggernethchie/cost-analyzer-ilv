@@ -46,12 +46,14 @@ Self-reliance is all i know. With all the challenges i have encountered in softw
 My team is great. We mostly communicate via teams and whatsapp. We work well together. Helping each other for the success of the project concept and implementation.
 Thank you to Lukas Huber and Michael Erharter my Professors  who are always willing to extend their helping hand to the struggling but interested to learn students. 
 
-### Discussion: 
+### Discussion:  
 
 As almost everything is new to me, it is interesting to know and learn not only the requirements engineering, but also  design and architectural part of developing
 a software, i have to admit that i find it very complicated to understand in the beginning but once i delve myself into it and thorough understanding it, I am now able to 
-create different UML diagrams by connecting relationships of the central elements of the system, and how an application could look like in a dashboard and all the needed requirements. 
-Of course there's a lot of rooms for improvement but getting there slowly. 
+create different UML diagrams by connecting relationships of the central elements of the system, and planning of how an application could look like in a dashboard and all the needed requirements. 
+Of course there's a lot of rooms for improvement but getting there slowly. I also like the web basics, playing around with HTML and as well as deploying our artifacts online and creating Pipeline and app deployment in the kubernetes cloud. 
+I was very curious before about how could i deploy my own data science educational blogs that i wrote while learning for my easy access when i need it. Knowingly it is possible through githubs fastpages or gitlab pages.  
+
 
 
 
