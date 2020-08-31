@@ -1,0 +1,1111 @@
+---
+title: 'Project Report - Millennium Development Goals'
+author: 'Group F: Nethchie Dürregger 1910837166, Nicole Diewald 1910837433, Christian Brandl 1910837954'
+date: 'May 10th 2020 (updated: `r Sys.Date()`)'
+output:
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+urlcolor: cyan
+subtitle: Algorithmik und Statistik Lab 2
+institute: FH Kufstein
+---
+
+***
+The competition "United Nations Millennium Development Goals" hosted by DrivenData is used as a basis for our project. More information on that competition can be found under following link: https://www.drivendata.org/competitions/1/united-nations-millennium-development-goals/page/3/
+
+![](img/header.png)
+
+***
+
+# Our Project Goal
+
+As attending the competition and using all data is too much for the Lab project, the project team agreed on following simplifications:
+
+* Only a subset of countries will be used - we decided on African Countries
+* Not all measures and values of the countries will be used. We want to find models to predict the values for **CO2 emissions (kt)**. Therefore, a subset of predictors will be chosen manually.
+* In the model, the time relation will be ignored and only the data itself will be used. So time series models will not be part of the project.
+* We will concentrate not only on finding good models, but also on figures to visualize or findings and make them tangible for the reader.
+
+### Project link to GitLab
+Our project page and repository is on [FH Kufstein GitLab - Drivendata Developmentgoals](https://gitlab.web.fh-kufstein.ac.at/algo2_lab/drivendata_developmentgoals) 
+
+## Short Information on the Competition
+The United Nations measures progress on their defined development goals using indicators, such as percent of the population making over one dollar per day. The competition task is to **predict the change in these indicators one year and five years into the future**.
+
+This will help to understand how to improve on achieving these goals, by uncovering complex relations between these goals and other economic indicators. Given the data from 1972 - 2007, specific indicator for each of the goals should be predicted in 2008 and 2012. 
+
+### Background and Motivation
+The member states of the UN defined a set of goals to measure the global development in the year 2000. The aim is to increase the standards of living around the world by emphasizing human capital, infrastructure and human rights.
+
+The eight goals are: \n
+
+1. to eradicate extreme poverty and hunger \n
+2. to achieve universal primary education \n
+3. to promote gender equality and empower women \n
+4. to reduce child mortality \n
+5. to improve maternal health \n
+6. to combat HIV/AIDS, malaria and other diseases \n
+7. to ensure the environmental sustainibility \n
+8. to develop a global partnership for development
+
+# Information on the Dataset
+The dataset "TestData.csv" has been downloaded from the DrivenData portal and is provided by the World Bank. The data was gathered since the founding of the World Bank in 1944 and is provided to the public.
+
+## Training Data
+For the competition, data from the World Bank from 1972 to 2007 was aggregated. It contains over 1200 macroeconomic indicators in 214 countries around the world. Each row represents a timeseries for a specific indicator and country. The row has an id, a country name, a series code, a series name, and data for every year as a column (if available). Missing values are labeled with NaN.
+
+![](img/data_example.png)
+
+# Preparation in R
+
+```{r, include=F}
+library(pacman)
+p_load(ggplot2)
+p_load(spData)
+p_load(tmap)
+p_load(leaflet)
+p_load(sf)
+
+p_load(caret)
+p_load(tidyverse)
+p_load(dplyr)
+p_load(reshape)
+p_load(gridExtra)
+p_load(cowplot)
+p_load(magick)
+p_load(Metrics)
+p_load(randomForest)
+p_load(corrplot)
+p_load(vip)
+p_load(coefplot)
+p_load(broom)
+
+```
+
+
+## Load Data
+```{r}
+data <- read.csv("data/TrainingSet.csv")
+```
+
+
+## Check Data Structure of the Dataset
+```{r}
+# Understand training data variables
+str(data)
+```
+
+The dataset includes 195402 obs. and 40 variables. At first glance, we can see already that the data contains a lot of NA which are missing values. We will ignore it for now and focus on checking what variables the dataset contains. These include: \n
+X:   An integer ID that represents the time series for a specific indicator and country. \n
+X1972..YR1972 - X2007..YR2007: A numeric time series variables of the macroeconomic indicators from 1972 to 2007 for many different countries and for many different macroeconomic indicators. \n
+Country.Name: A factor variable that contains the 214 countries.\n
+Series.Code and Series.Name the different macroeconomic indicators. \n
+
+
+As it is noticeable, the variable names are pretty annoying to read. We will try to convert it in a way it is easy to use later in the analysis. 
+
+```{r}
+# Rename training data variables
+colnames(data) <- (sub('[X][0-9]{4}[.]{2}','', colnames(data)))
+colnames(data) <- (sub('\\.$','', colnames(data)))
+head(data,2)
+
+```
+
+Let us try to figure out how to treat missing values. Before doing it, we need to understand the dataset deeper and see how we can treat the missing values. 
+
+```{r}
+data.frame("#_of_missing_values"=colSums(is.na(data)))
+```
+
+As we have a total of 195402 observations in the training set, there are lot of missing records per year in the dataset. It is 50% more than the total number of records. This confirms our decision of drastically simplifying the data for our project before we work with it.
+
+## Simplification/Filtering of Data
+
+### Choose Subset of Indicators and Countries
+
+As we decided to focus on National development in African countries for this project, we first define the countries which are in Africa and filter them from the dataset. 
+
+```{r message=FALSE, warning=FALSE}
+#Here are the list of African Countries to choose from 
+african_countries = c(
+  'Nigeria',	'Ethiopia',	'Egypt',	'Democratic Republic of the Congo',	
+  'South Africa',	'Tanzania',	'Kenya',	'Algeria',	'Uganda',	
+  'Sudan',	'Morocco',	'Ghana',	'Mozambique',	'Ivory Coast',
+  'Madagascar',	'Angola',	'Cameroon',	'Niger',	'Burkina Faso',	
+   'Mali',	'Malawi',	'Zambia',	'Senegal',	 'Zimbabwe',	'Chad',	
+   'Guinea', 'Tunisia',	'Rwanda',	'South Sudan',	'Benin',	
+   'Somalia',	'Burundi', 'Togo', 'Libya',	'Sierra Leone',	
+  'Central African Republic',	'Eritrea',	'Republic of the Congo',	
+  'Liberia',	'Mauritania',	'Gabon',	'Namibia',	'Botswana',	
+  'Lesotho',	'Equatorial Guinea',	'Gambia',	'Guinea-Bissau',	
+   'Mauritius',	'Swaziland',	'Djibouti',	'Reunion (France)',	
+   'Comoros',	'Western Sahara',	'Cape Verde',	'Seychelles'
+  )
+```
+
+Let us see what the indicators in the global development are:
+
+```{r}
+indicators <- data %>% distinct(Series.Name)
+glimpse(indicators)
+```
+
+There are 1305 indicators for global development. Manually reading through all these indicators, the ones chosen to be used in the analysis are listed below as ind_subset. The intention when choosing the indicators was to not only use the ones which have an obvious influence on the CO2 emissions, but also to see if we can find a correlations of the CO2 emissions and less obvious indicators.
+
+### Lets have a look onto the African Countries
+```{r message=FALSE, warning=FALSE}
+#africa = world %>%
+#  filter(continent == "Africa") %>%
+#  dplyr::select(name_long, subregion) %>%
+#  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+africa = world %>%
+  filter(continent == "Africa", !is.na(iso_a2)) %>%
+  left_join(worldbank_df, by = "iso_a2") %>%
+  dplyr::select(name, name_long, subregion, gdpPercap, HDI, pop_growth) %>%
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+tm_shape(africa) +
+  tm_fill("darkgreen") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_layout(frame = FALSE, title = "Location of Counries in Afrika", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+
+plot(africa["gdpPercap"])
+tm_shape(africa) + tm_polygons("subregion")
+```
+
+
+```{r}
+head(indicators,10)
+```
+
+```{r}
+# Predictor list to be included in the analysis
+ind_subset <- c('Agricultural land (% of land area)',
+                'Forest area (% of land area)',
+                'GDP per capita (current US$)',
+                'Organic water pollutant (BOD) emissions (kg per day)',
+                'Population (Total)',
+                'Tax revenue (% of GDP)',
+                'Agricultural methane emissions (% of total)',
+                'Agricultural nitrous oxide emissions (% of total)',
+                'Electric power consumption (kWh per capita)',
+                'Electricity production (kWh)',
+                'Adjusted net national income per capita (current US$)',
+                'Adjusted savings: net forest depletion (current US$)',
+                'Fuel exports (% of merchandise exports)',
+                'Fuel imports (% of merchandise imports)',
+                'Household final consumption expenditure, etc. (% of GDP)',
+                'Industry, value added (% of GDP)',
+                'Rural population (% of total population)',
+                'Terrestrial protected areas (% of total land area)',
+                'Alternative and nuclear energy (% of total energy use)',
+                'Public spending on education, total (% of GDP)',
+                'CO2 emissions (kt)'
+                )
+```
+
+### Filter data frame
+
+Now the data frame is filtered for African Countries and the chosen indicators.
+```{r message=FALSE, warning=FALSE}
+# filter train data for predictors of ind_subset and which are in African Countries list
+african_data <- data %>% filter(Series.Name %in% ind_subset)  %>% filter(Country.Name %in% african_countries)  %>%  droplevels()
+knitr::kable(head(african_data))
+```
+
+As we saw that there are many values missing, we want to see which African Countries contain all the indicators that we defined and use only these countries to work with.
+
+```{r}
+# check how many rows of data is left in the filtered data frame
+african_data_rows <- african_data %>% group_by(Country.Name) %>% summarise(n = n())
+
+# filter for countries which have data for all the indicators
+countries <- african_data_rows[order(african_data_rows$n, decreasing = TRUE), ] %>% filter(n == length(ind_subset))
+countries 
+```
+
+There are six countries which contain data for all the indicators we defined to predict the total CO2 emissions. This is a good amount of countries to work with! We will filter again for these countries:
+
+```{r}
+# filter for samples where country.name is in the country list of african countires with all defined predictors
+african_data <- african_data %>% filter(Country.Name %in% countries$Country.Name)  %>% droplevels()
+```
+
+## Reshape Data Frame
+
+We want to reshape the data frame so that is easier to work with, having an own column per indicator.
+
+### Using the Mean of each country for the indicators
+
+The first idea to ignore the time dependence of the data is to use the mean of all years for each indicator and country.
+
+```{r}
+
+code <- african_data %>% distinct(Series.Code)
+col_filter <- grepl('YR' , colnames(african_data))
+#str(african_data[col_filter])
+
+#create new column with average over years for each grouped row of Series.Name
+african_data$YearsMean <- rowMeans(african_data[col_filter], na.rm=TRUE)
+
+#Select only needed columns
+african_data_cleaned <- african_data %>% dplyr::select(Series.Name, Country.Name, Series.Code, YearsMean)
+
+glimpse(african_data_cleaned)
+head(african_data_cleaned)
+
+# Restructuring data
+# transposed row values of Series.Name to columns
+african_data_country_pred <- cast(african_data_cleaned, Country.Name~Series.Name)
+knitr::kable(head(african_data_country_pred))
+```
+
+Now we see that there are only six rows, one for each country. This might be too less to fit a model to these data. 
+
+### Using all samples
+
+Instead of using the mean for each country, we decided to use all the samples and just ignore that that data is from different years. So the resulting data frame should look as follows:
+
+* indicator name as column name
+* one row is one sample, which means the values for the measure in one country in one year
+* country.name should also be a column name in addition to the indicators, so that the country is a factor variable
+
+
+```{r}
+# reshape as described above
+reshaped <- data.frame()
+for (x in colnames(african_data[col_filter])) {
+  a <- data.frame('value' = african_data[,x], 'Country.Name' = african_data$Country.Name, 'Series.Name' = african_data$Series.Name, 'Year' = x)
+  b <- cast(a, Country.Name + Year ~ Series.Name)
+  reshaped <- rbind(reshaped, b)
+}
+
+# remove X for year naming
+reshaped$Year <- strtoi(substr(reshaped$Year, 3,6))
+
+# show data frame
+knitr::kable(head(reshaped,10))
+```
+
+The data now looks as described above. We see that there are many NA in the data, even though we filtered for countries that have all the indicators available.
+
+```{r}
+# how many samples does the data frame have
+nrow(reshaped)
+
+# how many NA values are there per column
+grouper <- reshaped %>%
+  group_by(Country.Name) %>%
+  summarise_each(funs(sum(!is.na(.))))
+
+knitr::kable(grouper)
+```
+
+The table confirms the filtering above: there are values for each country for each indicator available. There are 36 years of data, so having 36 not-NA values is the best case for the indicators above. This is the case for our goal variable CO2 emissions and for some others. However, we see that there are also indicators which have hardly any entries, such as the Agricultural methane and oxide emissions or the organic water pollutant.
+
+We will drop indicators with more than 10% of variables missing:
+
+```{r}
+maxval <- length(reshaped$Country.Name)
+check_na <- data.frame("#_of_missing_values"=colSums(is.na(reshaped))/maxval*100)
+knitr::kable(check_na)
+filter_na <- check_na %>% rownames_to_column('indicator') %>% filter(X._of_missing_values <=10 )
+filter_na
+
+# filter reshaped dataframe for new indicators with NA count less than 50%
+reshaped <- reshaped[ ,which((names(reshaped) %in% filter_na$indicator)==TRUE)]
+knitr::kable(head(reshaped))
+
+# used for imputation later:
+var_num <- filter_na$indicator[3:nrow(filter_na)]
+```
+
+# Short Introduction of choosen Countries
+
+### Botswana
+Botswana, officially the Republic of Botswana, is a landlocked country in Southern Africa. It was becoming independent from the Commonwealth on 30 September 1966. Since then, it has been a representative republic, with a consistent record of uninterrupted democratic elections and the lowest perceived corruption ranking in Africa since at least 1998. It is currently Africa's oldest continuous democracy. Botswana is topographically flat, with up to 70 percent of its territory being the Kalahari Desert. It is bordered by South Africa to the south and southeast, Namibia to the west and north, and Zimbabwe to the northeast. Its border with Zambia to the north near Kazungula is poorly defined but is, at most, a few hundred metres long.
+
+[Source](https://en.wikipedia.org/wiki/Botswana)
+
+```{r}
+
+botswana = world %>% 
+  filter(name_long == "Botswana", !is.na(iso_a2))
+
+```
+
+```{r message=FALSE, warning=FALSE}
+
+#tm_shape(africa) + tm_polygons("name_long")
+
+tm_shape(africa) +
+  tm_fill("lightgrey") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_shape(botswana) +
+  tm_fill("darkgreen") +
+  tm_text("name_long", size = 0.5) +
+  tm_layout(frame = FALSE, title = "Location of Botswana in Afrika", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+
+```
+
+A mid-sized country of just over 2.3 million people, Botswana is one of the most sparsely populated countries in the world. Around 10 percent of the population lives in the capital and largest city, Gaborone. Formerly one of the poorest countries in the world—with a GDP per capita of about US70 per year in the late 1960s—Botswana has since transformed itself into an upper middle income country, with one of the world's fastest-growing economies. The economy is dominated by mining, cattle, and tourism. Botswana boasts a GDP (purchasing power parity) per capita of about $18,825 per year as of 2015, which is one of the highest in Africa. Its high gross national income (by some estimates the fourth-largest in Africa) gives the country a relatively high standard of living and the highest Human Development Index of continental Sub-Saharan Africa.
+
+Botswana is a member of the African Union, the Southern African Development Community, the Commonwealth of Nations, and the United Nations.
+```{r}
+
+p1 <- ggdraw() + 
+  draw_image("img/botswana_city.jpg", scale = 0.9) +
+  draw_label("Botswana City", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+p2 <- ggdraw() + 
+  draw_image("img/botswana_rural.jpg", scale = 0.9) +
+  draw_label("Botswana Rural", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+
+plot_grid(p1, p2)
+```
+
+### Ethiopia
+Ethiopia, officially the Federal Democratic Republic of Ethiopia, is a landlocked country in the Horn of Africa. It shares borders with Eritrea to the north, Djibouti to the northeast, Somalia to the east, Kenya to the south, South Sudan to the west and Sudan to the northwest. With over 109 million inhabitants as of 2019, Ethiopia is the most populous landlocked country in the world and the second-most populous nation on the African continent. The country has a total area of 1,100,000 square kilometres. Its capital and largest city is Addis Ababa, which lies a few miles west of the East African Rift that splits the country into the Nubian and Somali tectonic plates. Ethiopian national identity is grounded in the indigenous Amharic language, the historic and contemporary roles of Christianity and Islam, and the independence of Ethiopia from foreign rule, stemming from the various ancient Ethiopian kingdoms of antiquity.
+
+[Source](https://en.wikipedia.org/wiki/Ethiopia)
+
+```{r message=FALSE, warning=FALSE}
+ethiopia = world %>% 
+  filter(name_long == "Ethiopia", !is.na(iso_a2))
+
+tm_shape(africa) +
+  tm_fill("lightgrey") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_shape(ethiopia) +
+  tm_fill("darkgreen") +
+  tm_text("name_long", size = 0.5) +
+  tm_layout(frame = FALSE, title = "Location of Ethiopia in Afrika", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+```
+
+According to the IMF, Ethiopia was one of the fastest growing economies in the world, registering over 10% economic growth from 2004 through 2009. It was the fastest-growing non-oil-dependent African economy in the years 2007 and 2008. In 2015, the World Bank highlighted that Ethiopia had witnessed rapid economic growth with real domestic product (GDP) growth averaging 10.9% between 2004 and 2014.
+
+In 2008 and 2011, Ethiopia's growth performance and considerable development gains were challenged by high inflation and a difficult balance of payments situation. Inflation surged to 40% in August 2011 because of loose monetary policy, large civil service wage increase in early 2011, and high food prices. For 2011/12, end-year inflation was projected to be about 22%, and single digit inflation is projected in 2012/13 with the implementation of tight monetary and fiscal policies.
+
+In spite of fast growth in recent years, GDP per capita is one of the lowest in the world, and the economy faces a number of serious structural problems. However, with a focused investment in public infrastructure and industrial parks, Ethiopia's economy is addressing its structural problems to become a hub for light manufacturing in Africa.[220] In 2019 a law was passed allowing expatriate Ethiopians to invest in Ethiopia's financial service industry.
+```{r}
+
+p1 <- ggdraw() + 
+  draw_image("img/ethiopia_city.jpg", scale = 0.9) +
+  draw_label("Ethiopia City", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+p2 <- ggdraw() + 
+  draw_image("img/ethiopia_rural.jpg", scale = 0.9) +
+  draw_label("Ethiopia Rural", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+
+plot_grid(p1, p2)
+```
+
+### Ghana
+Ghana, officially the Republic of Ghana, is a country located along the Gulf of Guinea and Atlantic Ocean, in the subregion of West Africa. Spanning a land mass of 238,535 km2, Ghana is bordered by the Ivory Coast in the west, Burkina Faso in the north, Togo in the east, and the Gulf of Guinea and Atlantic Ocean in the south. Ghana means "Warrior King" in the Soninke language.
+
+Ghana's population of approximately 30 million spans a variety of ethnic, linguistic and religious groups. According to the 2010 census, 71.2% of the population was Christian, 17.6% was Muslim, and 5.2% practised traditional faiths. Its diverse geography and ecology ranges from coastal savannahs to tropical rain forests.
+
+Ghana is a unitary constitutional democracy led by a president who is both head of state and head of the government. Ghana's growing economic prosperity and democratic political system have made it a regional power in West Africa. It is a member of the Non-Aligned Movement, the African Union, the Economic Community of West African States (ECOWAS), Group of 24 (G24) and the Commonwealth of Nations.
+
+[Source](https://en.wikipedia.org/wiki/Ghana)
+
+
+```{r message=FALSE, warning=FALSE}
+ghana = world %>% 
+  filter(name_long == "Ghana", !is.na(iso_a2))
+
+tm_shape(africa) +
+  tm_fill("lightgrey") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_shape(ghana) +
+  tm_fill("darkgreen") +
+  tm_text("name_long", size = 0.5) +
+  tm_layout(frame = FALSE, title = "Location of Ghana in Afrika", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+```
+
+Ghana is an average natural resource enriched country possessing industrial minerals, hydrocarbons and precious metals. It is an emerging designated digital economy with mixed economy hybridisation and an emerging market with 8.7% GDP growth in 2012. It has an economic plan target known as the "Ghana Vision 2020". This plan envisions Ghana as the first African country to become a developed country between 2020 and 2029 and a newly industrialised country between 2030 and 2039. This excludes fellow Group of 24 member and Sub-Saharan African country South Africa, which is a newly industrialised country. Ghana's economy also has ties to the Chinese yuan renminbi along with Ghana's vast gold reserves. In 2013, the Bank of Ghana began circulating the renminbi throughout Ghanaian state-owned banks and to the Ghana public as hard currency along with the national Ghana cedi for second national trade currency. Between 2012 and 2013, 37.9 percent of rural dwellers were experiencing poverty whereas only 10.6 percent of urban dwellers were. Urban areas hold greater opportunity for employment, particularly in informal trade, while nearly all (94 percent) of rural poor households participate in the agricultural sector.
+
+```{r}
+
+p1 <- ggdraw() + 
+  draw_image("img/ghana_city.jpg", scale = 0.9) +
+  draw_label("Ghana City", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+p2 <- ggdraw() + 
+  draw_image("img/ghana_rural.jpg", scale = 0.9) +
+  draw_label("Ghana Rural", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+
+plot_grid(p1, p2)
+```
+
+### Morocco
+Morocco, officially the Kingdom of Morocco, is a country located in the Maghreb region of North Africa. It overlooks the Mediterranean Sea to the north and the Atlantic Ocean to the west, with land borders with Algeria to the east and Western Sahara to the south (status disputed). Morocco also claims the exclaves of Ceuta, Melilla and Peñón de Vélez de la Gomera, all of them under Spanish jurisdiction, as well as several small Spanish-controlled islands off its coast. The capital is Rabat and the largest city is Casablanca. Morocco spans an area of 710,850 km2 (274,460 sq mi) and has a population of over 36 million.
+
+[Source](https://en.wikipedia.org/wiki/Morocco)
+
+```{r message=FALSE, warning=FALSE}
+morocco = world %>% 
+  filter(name_long == "Morocco", !is.na(iso_a2))
+
+tm_shape(africa) +
+  tm_fill("lightgrey") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_shape(morocco) +
+  tm_fill("darkgreen") +
+  tm_text("name_long", size = 0.5) +
+  tm_layout(frame = FALSE, title = "Location of Morocco in Afrika", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+```
+
+Morocco's economy is considered a relatively liberal economy governed by the law of supply and demand. Since 1993, the country has followed a policy of privatisation of certain economic sectors which used to be in the hands of the government. Morocco has become a major player in African economic affairs, and is the 5th African economy by GDP (PPP). Morocco was ranked as the first African country by the Economist Intelligence Unit's quality-of-life index, ahead of South Africa.[citation needed] However, in the years since that first-place ranking was given, Morocco has slipped into fourth place behind Egypt.
+
+Government reforms and steady yearly growth in the region of 4–5% from 2000 to 2007, including 4.9% year-on-year growth in 2003–2007 helped the Moroccan economy to become much more robust compared to a few years earlier. For 2012 the World Bank forecast a rate of 4% growth for Morocco and 4.2% for following year, 2013.
+
+The services sector accounts for just over half of GDP and industry, made up of mining, construction and manufacturing, is an additional quarter. The industries that recorded the highest growth are tourism, telecoms, information technology, and textile.
+
+```{r}
+
+p1 <- ggdraw() + 
+  draw_image("img/morocco_city.jpg", scale = 0.9) +
+  draw_label("Morocco City", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+p2 <- ggdraw() + 
+  draw_image("img/morocco_rural.jpg", scale = 0.9) +
+  draw_label("Morocco Rural", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+
+plot_grid(p1, p2)
+```
+
+### South Africa
+South Africa, officially the Republic of South Africa (RSA), is the southernmost country in Africa. With over 58 million people, it is the world's 24th-most populous nation and covers an area of 1,221,037 square kilometres. South Africa has three designated capital cities: executive Pretoria, judicial Bloemfontein and legislative Cape Town. The largest city is Johannesburg. About 80% of South Africans are of Bantu ancestry, divided among a variety of ethnic groups speaking different African languages. The remaining population consists of Africa's largest communities of European, Asian, Indian, and multiracial ancestry.
+
+It is bounded to the south by 2,798 kilometres of coastline of Southern Africa stretching along the South Atlantic and Indian Oceans; to the north by the neighbouring countries of Namibia, Botswana, and Zimbabwe; and to the east and northeast by Mozambique and Eswatini (former Swaziland); and it surrounds the enclaved country of Lesotho. It is the southernmost country on the mainland of the Old World or the Eastern Hemisphere, and the most populous country located entirely south of the equator.
+
+[Source](https://en.wikipedia.org/wiki/South_Africa)
+
+```{r message=FALSE, warning=FALSE}
+south_africa = world %>% 
+  filter(name_long == "South Africa", !is.na(iso_a2))
+
+tm_shape(africa) +
+  tm_fill("lightgrey") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_shape(south_africa) +
+  tm_fill("darkgreen") +
+  tm_text("name_long", size = 0.5) +
+  tm_layout(frame = FALSE, title = "Location of South Africa", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+```
+
+South Africa is a multiethnic society encompassing a wide variety of cultures, languages, and religions. Its pluralistic makeup is reflected in the constitution's recognition of 11 official languages, the fourth-highest number in the world. Two are of European origin: Afrikaans developed from Dutch and serves as the first language of most coloured and white South Africans; English reflects the legacy of British colonialism, and is commonly used in public and commercial life, though it is fourth-ranked as a spoken first language. The country is one of the few in Africa never to have had a coup d'état, and regular elections have been held for almost a century. However, the vast majority of black South Africans were not enfranchised until 1994.
+
+South Africa is a developing country and ranks 113th on the Human Development Index, the seventh-highest in Africa. It has been classified by the World Bank as a newly industrialised country, with the second-largest nominal GDP in Africa, and the 33rd-largest in the world. The country is a middle power in international affairs; it maintains significant regional influence and is a member of the G20. However, crime, poverty and inequality remain widespread, with about a quarter of the population unemployed and living on less than US$1.25 a day.
+
+```{r}
+
+p1 <- ggdraw() + 
+  draw_image("img/south_africa_city.jpg", scale = 0.9) +
+  draw_label("South Africa City", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+p2 <- ggdraw() + 
+  draw_image("img/south_africa_rural.jpg", scale = 0.9) +
+  draw_label("South Africa Rural", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+
+plot_grid(p1, p2)
+```
+
+### Zimbabwe
+Zimbabwe, officially the Republic of Zimbabwe, formerly Rhodesia, is a landlocked country located in Southern Africa, between the Zambezi and Limpopo Rivers, bordered by South Africa, Botswana, Zambia and Mozambique. The capital and largest city is Harare. The second largest city is Bulawayo. A country of roughly 14 million people, Zimbabwe has 16 official languages, with English, Shona, and Ndebele the most common.
+
+Robert Mugabe became Prime Minister of Zimbabwe in 1980, when his ZANU–PF party won the elections following the end of white minority rule; he was the President of Zimbabwe from 1987 until his resignation in 2017. Under Mugabe's authoritarian regime, the state security apparatus dominated the country and was responsible for widespread human rights violations. Mugabe maintained the revolutionary socialist rhetoric of the Cold War era, blaming Zimbabwe's economic woes on conspiring Western capitalist countries. Contemporary African political leaders were reluctant to criticise Mugabe, who was burnished by his anti-imperialist credentials, though Archbishop Desmond Tutu called him "a cartoon figure of an archetypal African dictator". The country has been in economic decline since the 1990s, experiencing several crashes and hyperinflation along the way.
+
+[Source](https://en.wikipedia.org/wiki/Zimbabwe)
+
+```{r message=FALSE, warning=FALSE}
+zimbabwe = world %>% 
+  filter(name_long == "Zimbabwe", !is.na(iso_a2))
+
+tm_shape(africa) +
+  tm_fill("lightgrey") +
+  tm_borders() +
+  tm_text("name_long", size = 0.3) +
+  tm_shape(zimbabwe) +
+  tm_fill("darkgreen") +
+  tm_text("name_long", size = 0.5) +
+  tm_layout(frame = FALSE, title = "Location of Zimbabwe", title.size = 1, title.position = c(x = 0.42, y = 0.98))
+```
+
+Minerals, gold, and agriculture are the main foreign exports of Zimbabwe. Tourism also plays a key role in its economy.
+
+```{r}
+
+p1 <- ggdraw() + 
+  draw_image("img/zimbabwe_city.jpg", scale = 0.9) +
+  draw_label("Zimbabwe City", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+p2 <- ggdraw() + 
+  draw_image("img/zimbabwe_rural.jpg", scale = 0.9) +
+  draw_label("Zimbabwe Rural", color = "Grey", size = 20, angle = 0, x = 0.5, y = 0.82)
+
+plot_grid(p1, p2)
+```
+
+
+# Preprocessing and Explorative Data Analysis
+
+With the adapted data frame for our project, a main work will be to understand the data better and find correlations, before fitting a model.
+
+## First View on Data
+
+### View Indicators over Time
+```{r message=FALSE, warning=FALSE}
+ggplot(reshaped, aes(x = Year, y = `Population (Total)`, color = Country.Name)) + 
+  geom_point() +
+  ggtitle('Population over Time') +
+  xlab('Time [years]') +
+  ylab('Population per Country')
+
+ggplot(reshaped, aes(x = Year, y = `CO2 emissions (kt)`, color = Country.Name)) + 
+  geom_point()  +
+  ggtitle('CO2 Emissions over Time') +
+  xlab('Time [years]') +
+  ylab('CO2 emissions [kt] per Country') 
+
+ggplot(reshaped, aes(x = Year, y = `CO2 emissions (kt)`/`Population (Total)`, color = Country.Name)) + 
+  geom_point()  +
+  ggtitle('CO2 Emissions normalized over Time') +
+  xlab('Time [years]') +
+  ylab('CO2 emissions [kt] per capita') 
+
+ggplot(reshaped, aes(x = Year, y = `GDP per capita (current US$)`, color = Country.Name)) + 
+  geom_point()  +
+  ggtitle('GDP per capita over Time') +
+  xlab('Time [years]') +
+  ylab('GDP per capita (current US$)') 
+
+ggplot(reshaped, aes(x = Year, y = `Household final consumption expenditure, etc. (% of GDP)`, color = Country.Name)) + 
+  geom_point()  +
+  ggtitle('Household final consumption expenditure') +
+  xlab('Time [years]') +
+  ylab('Household final consumption expenditure, etc. (% of GDP)') 
+
+```
+
+The plots above give a first impression on the data by plotting them over time. We can see that the population is growing in every country over the years, the highest growth can be seen in Ethiopia. The second and third plot show th CO2 emissions, also over time. For the third plot, the emissions where normalized by using the population in the country. As a result, we see for example in South Africa that the absolute emissions are growing very fast, however if we view in relatively to the population growth, it reached a peak around 1985 and and then became a bit lower again. So it might be a good approach to scale data to the population of the country.
+
+In most of the countries, we see a high increase of GDP per capita after 2000. The household final consumption expenditure stays quite stable for most countries over time, except for Botswana and Zimbabwe.
+
+### First View on Correlations
+```{r message=FALSE, warning=FALSE}
+ggplot(reshaped, aes(x = `CO2 emissions (kt)`, y = `GDP per capita (current US$)`, color = Country.Name)) + 
+  geom_point() +
+  ggtitle('GDP per Capita over CO2 emissions')+
+  xlab('CO2 emissions (kt)') +
+  ylab('GDP per capita (US$)')
+
+```
+
+The plot above shows that there seems to be a linear relationship between the GDP per capita and the CO2 emissions. A high GDP might indicate more industry as well as a higher wealth in the country, which would be a reason for higher emissions.
+
+
+## Imputing and Scaling
+
+### Impute missing values
+
+Simple Modelling with the help of tideyverse and modelr. Here we are using the transpose african_data reshaped and assigned it to the reshaped_african variable. 
+
+```{r}
+reshaped_african <- reshaped
+```
+
+
+In working with large dataset, it is safe to impute missing values with median as it is robust to outlier. In this project we imputed median to all missing element in the dataset. 
+
+```{r message=FALSE, warning=FALSE}
+library(data.table)
+
+#iterrate through numeric columns in the dataset and impute median 
+for(k in names(reshaped_african)){
+
+      if(k %in% var_num){
+
+        # impute numeric variables with median
+        med <- median(reshaped_african[[k]],na.rm = T)
+        set(x = reshaped_african, which(is.na(reshaped_african[[k]])), k, med)
+      }
+}
+
+
+```
+
+If we check here, our dataset does not have missing values anymore.  
+'indicator' = names(reshaped_african)
+```{r}
+check_na <- data.frame("#_of_missing_values"=colSums(is.na(reshaped_african)))
+check_na
+```
+
+The above are the final indicators that will be used for the analysis, Before we proceed we pre-process the data set further.
+
+
+### Normalization to Country Population
+
+To make the values between the countries comparable, some indicators still need to be normalized. As a base for normalization, the Population of the country is used. Only indicators which are not already in per cent or per capita are normalized in this next step.
+
+```{r}
+# normalize data to population of country
+reshaped_african$`Adjusted savings: net forest depletion per capita (current US$)` <-
+  reshaped_african$`Adjusted savings: net forest depletion (current US$)`/reshaped_african$`Population (Total)`
+
+reshaped_african$`CO2 emissions per capita (kt)` <-
+  reshaped_african$`CO2 emissions (kt)`/reshaped_african$`Population (Total)`
+
+reshaped_african$`Electricity production per capita (kWh)` <-
+  reshaped_african$`Electricity production (kWh)`/reshaped_african$`Population (Total)`
+
+# delete original columns
+reshaped_african <- reshaped_african %>% dplyr::select(-c(`Adjusted savings: net forest depletion (current US$)`,`CO2 emissions (kt)`,`Electricity production (kWh)` ))
+
+```
+
+### Scaling the Data
+
+We scale and center the data so that they are all in similar magnitudes.
+```{r}
+reshaped_african <- reshaped_african %>%
+   mutate_at(names(reshaped_african)[3:length(reshaped_african)], funs(c(scale(.))))
+
+knitr::kable(summary(reshaped_african))
+```
+
+We finally have the normalized dataset that is free from missing values. The next thing is to see how these african countries indicators are correlated from each other
+
+```{r}
+library(corrplot)
+
+#plot.new()
+options(repr.plot.width = 20, repr.plot.height = 15)
+reshaped_african_corr <- reshaped_african[sapply(reshaped_african, is.numeric)]
+# on some
+#corr <- cor(array(reshaped_african_corr))
+corr <- cor(reshaped_african_corr)
+corrplot <- corrplot(corr,method ="number") 
+
+```
+
+Our selection of the column names:
+```{r}
+colnames(reshaped_african_corr)
+```
+
+It seems to be that we have quite correlated indicators. A few examples includes:
+
+"Adjusted net national income per capita (current US$)" is highly positively correlated with "CO2 emissions (kt)" , "Electric power consumption (kWh per capita)",  "Electricity production (kWh)" 
+
+"CO2 emissions (kt)" is also highly positively correlated with "Electric power consumption (kWh per capita)", "Electricity production (kWh)", "GDP per capita (current US$)",  "CO2 emissions per capita (kt)", "Electricity production per capita (kWh)"    
+
+
+Let us see how these few indicators are distributed all over the dataset. 
+
+```{r}
+national_income <- ggplot(reshaped_african) +
+  geom_density(aes(`Adjusted net national income per capita (current US$)`)) 
+
+ep_consumtion <- ggplot(reshaped_african) +
+  geom_density(aes(`Electric power consumption (kWh per capita)`)) 
+
+forest_depletion <- ggplot(reshaped_african) +
+  geom_density(aes(`Adjusted savings: net forest depletion per capita (current US$)`)) 
+
+
+gdp_per_capita <- ggplot(reshaped_african) +
+  geom_density(aes(`GDP per capita (current US$)`))  
+
+co2_per_capita <- ggplot(reshaped_african) +
+  geom_density(aes(`CO2 emissions per capita (kt)`)) 
+
+AgriLand <- ggplot(reshaped_african) +
+  geom_density(aes(`Agricultural land (% of land area)`)) 
+
+
+household_exp <- ggplot(reshaped_african) +
+  geom_density(aes(`Household final consumption expenditure, etc. (% of GDP)`)) 
+
+grid.arrange(national_income, ep_consumtion, forest_depletion, co2_per_capita, AgriLand, household_exp)
+
+```
+
+These are  6 out of 11  african countries economic indicators that we graphed here. It can be seen that most of the indicators are right skewed except the Agricultural land and the household final consumption expenditure.
+
+```{r}
+knitr::kable(head(reshaped_african))
+```
+
+Before we proceed to modelling, we first rename the indicators so that we do not run into problem when we do the modelling. The below are the names of the indicators 
+
+adj_net_national_income         : Adjusted net national income per capita (current US \$) 
+adj_savings_net_forest_deplet   : Adjusted savings: net forest depletion (current US \$) 
+agri_land                       : Agricultural land (\% of land area)  
+alter_and_nuclear_energy        : Alternative and nuclear energy (percentage of total energy use)  
+elect_power_consump             : Electric power consumption (kWh per capita)  
+gdp_per_cap                     : GDP per capita (current US Dollar)  
+household_consump_expend        : Household final consumption expenditure, etc. (percentage of GDP)  
+total_pop                       : Population (Total)  
+rural_pop                       : Rural population (\% of total population)  
+adj_savings_per_cap             : Adjusted savings: net forest depletion per capita (current US \$)  
+co2_per_cap                     : CO2 emissions per capita (kt)  
+elect_prod_per_cap              : Electricity production per capita (kWh)  
+
+
+```{r}
+print(names(reshaped_african))
+
+names(reshaped_african) <- c("country", "Year", "adj_net_national_income", "agri_land", "alter_and_nuclear_energy",
+                             "elect_power_consump", "gdp_per_cap", "household_consump_expend", "total_pop", "rural_pop",
+                             "adj_savings_per_cap", "co2_per_cap", "elect_prod_per_cap")
+print(names(reshaped_african))
+```
+
+
+
+# Tree-Model Predicting CO2 Emissions  
+
+Since most of the indicators are not normally distributed, it could affect our analysis if we are not careful. After filtering the most influencial indicators to African countries, we are left with 126 observations. If we drop outlier values, we lost the information in the terms of the variability in the data. One option to treat these outliers is to replace it with the median. Other option is to use powerful model that is robust to outliers. We use random forest model. It is based on the decision tree base learner where it isolate observations into small leaves. In the case of regression , it is generally a very low-order regression model (usually only the average of the observations in the leaf). Therefore, for regression, extreme values do not affect the entire model because they get averaged locally. So the fit to the other values is not affected.
+
+We will predict the CO2 emission, given the rest of the indicators. Carbon emissions affect the planet significantly, as they are the greenhouse gas with the highest levels of emissions in the atmosphere. This, of course, causes global warming and ultimately, climate change. This warming causes extreme weather events like tropical storms, wildfires, severe droughts and heat waves. 
+
+We will predict the carbon emission of all filtered African countries and see the indicators that contribute to these countries emitting carbon in the atmosphere. 
+
+```{r message=FALSE, warning=FALSE}
+
+set.seed(123)
+
+#fit random forest model
+african_rf_model <- randomForest(co2_per_cap ~  . -Year, data = reshaped_african)
+
+#predict 
+african_rf_pred <- predict(african_rf_model, new_data = reshaped_african) 
+
+#Add the predicted values in the original data for easy plotting
+african_co2 <- reshaped_african %>% mutate(co2_pred = african_rf_pred)
+
+#plot the predicted minus actual 
+south_africa <- ggplot() + theme_bw() +
+  geom_point( 
+    data = african_co2,  
+    mapping = aes(x = Year, y = co2_per_cap,  color = "real")
+    ) +
+   geom_point( 
+    data = african_co2, 
+    mapping = aes(x = Year, y = co2_pred, color = "predicted")
+    ) + 
+  ggtitle("Carbon Emission in Africa") + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  ylab("CO2 emissions per capita") 
+
+#variable importance
+rfImp <- vip(african_rf_model, color = 'red', fill='light blue') + 
+  ggtitle('Variable Importance') +
+  theme(plot.title = element_text(hjust = 0.5)) 
+
+grid.arrange(south_africa, rfImp)
+
+```
+
+As we can see in the result, there is one country that is emitting much carbon dioxide than the rest of the  filtered African countries. Overall, it is the agricultural land and electric power consumption of these countries emitting CO2. But which country is this? We will apply the random forest model to each country to figure out indicators that contribute to them emitting co2 
+
+```{r message=FALSE, warning=FALSE}
+set.seed(28)
+
+# define function for linear model
+
+func_rf_model <- function(countryname) {
+  # Create a dataset for south africa
+  african_rf_data <- filter(reshaped_african, country==countryname) 
+  african_rf_data <-  african_rf_data[c(2:13)]
+  
+  #fit random forest model
+  african_rf_model <- randomForest(co2_per_cap ~  . -Year, data = african_rf_data)
+  african_rf_pred <- predict(african_rf_model, new_data = african_rf_data) 
+  
+  #Add the predicted values in the original data for easy plotting
+  african_rf_data <- african_rf_data %>% mutate(co2_pred = african_rf_pred)
+  
+  #Calculate R2
+  african_rf_r2 <- 1 - (sum((african_rf_data$co2_per_cap-african_rf_data$co2_pred)^2)/sum((african_rf_data$co2_per_cap-mean(african_rf_data$co2_per_cap))^2)) 
+  
+  african_rf_rmse <- RMSE(african_rf_pred, african_rf_data$co2_per_cap )
+  
+  
+  #Plot actual vs predicted 
+  plot_country <- ggplot() + theme_bw() +
+    geom_point( 
+      data = african_rf_data,  
+      mapping = aes(x = Year, y = co2_per_cap, color = "real")
+      ) +
+    geom_point( 
+      data = african_rf_data, 
+      mapping = aes(x = Year, y = co2_pred, color = "predicted")
+      ) + 
+    ggtitle(paste( countryname, ";  R-squared: ", round(african_rf_r2 * 100,0),"%" , "; RMSE:", round(african_rf_rmse, 6))) + 
+    theme(plot.title = element_text(hjust = 0.5)) +
+    ylab("CO2 emissions per capita (kt)")
+  
+  #plot(plot_country)  
+  plot_varImp <- vip(african_rf_model, color = 'red', fill='light blue')
+  grid.arrange(plot_country, plot_varImp, nrow = 2)
+
+  metrics <- list( r2 = african_rf_r2, mse = african_rf_rmse)
+  return (metrics)
+}
+
+#Get the list 
+rf_r2 <- list()
+
+
+afr <- levels(reshaped_african$country)
+afr
+
+for (i in seq(1:length(afr))) {
+  rf_r2[i] <- func_rf_model(afr[i])
+}
+
+
+```
+
+With the help of the RF model, we are able to see the carbon emission of each countries and which economic indicators negatively affect our ecosystems. The metric summary table will be shown in the next section.  But as we can see,  although the random forest model perform really good in the dataset with lower RMSE, it is still very obvious that it is South Africa emitting much more co2 than the rest of the countries. 
+
+For South African country, the RF model seems to have predicted the true carbon dioxide emission over the year. "Rural population (% of total population)", "Population (Total)" and  "Electric power consumption (kWh per capita)"  are the top 3 indicators that has a big contribution to the carbon dioxide emission. Morocco and Botswana are emitting the least co2, but even then it is still the overall and rural population as well as Electric power consumption that are the main cause for carbon emission. 
+
+
+# Linear Models predicting CO2 Emissions
+
+As a comparison to the random forest model, an easy linear model is trained to predict the CO2 emissions with all defined predictors.
+
+```{r fig.height=4, fig.width=10, message=FALSE, warning=FALSE}
+# define function for linear model
+
+func_linear_model <- function(countryname) {
+  # Create a dataset for south africa
+  sa_rf_data <- filter(reshaped_african, country==countryname) 
+  sa_rf_data <-  sa_rf_data[c(2:13)]
+  
+  #fit linear model
+  african_linear_model <- lm(co2_per_cap ~  . -Year, data = sa_rf_data)
+  african_rf_pred <- predict(african_linear_model, new_data = sa_rf_data) 
+  
+  #Add the predicted values in the original data for easy plotting
+  sa_rf_data <- sa_rf_data %>% mutate(co2_pred = african_rf_pred)
+  
+  #Plot actual vs predicted 
+  plot_country <- ggplot() + theme_bw() +
+    geom_point( 
+      data = sa_rf_data,  
+      mapping = aes(x = Year, y = co2_per_cap, color = "real")
+      ) +
+    geom_point( 
+      data = sa_rf_data, 
+      mapping = aes(x = Year, y = co2_pred, color = "predicted")
+      ) + 
+    ggtitle(paste("CO2 Emission for", countryname)) +
+    ylab("CO2 emissions per capita [-]")
+  
+  #plot(plot_country)
+    
+  cof <- african_linear_model$coefficients[2:length(african_linear_model$coefficients)]
+  cof <- data.frame(names(cof), cof)
+  plot_bars <- ggplot(data = cof,  
+      mapping = aes(x=names.cof., y=cof)) + theme_bw() +
+    geom_bar(stat = "identity") + 
+    theme(axis.text.x=element_text(angle=45,hjust=1,vjust=1)) +
+    xlab("Coefficient") +
+    ylab("Value")
+  
+ # plot(plot_bars)
+  
+  grid.arrange(plot_country, plot_bars, nrow = 1)
+  
+  return (summary(african_linear_model)$r.squared)
+}
+
+rsquared_lm <- list()
+afr <- levels(reshaped_african$country)
+
+for (i in seq(1:length(afr))) {
+  rsquared_lm[i] <- func_linear_model(afr[i])
+}
+
+
+```
+
+
+The Linear Models fit the data quite well, as it can also be seen in the R2 table in the next chapter. Comparing the coefficient weights for each of the countries, there is no pattern that a special coefficient is always similar important for a model, not even in the same direction (positive/negative influence on the prediction). One example is the alternative and nuclear energy ratio of the total energy use in the countries. We would expect that if the percentage is high, there must be a strong negative influence on the CO2 emissions per capita. However, the coefficient is only slightly negative in some of the countries. In Botswana it is even highly positive, so that a high percentage of alternative and nuclear energy would cause higher CO2 emissions. In some models, the agricultural land, the rural population ratio and the adjusted net national income are important predictors, but they are also sometimes positive and sometimes negative. A good example is the comparison of agricultural land ratio between Botswana and south Africa, which is one very positive and once very negative. 
+
+A reason for this discrepancies might be that the many predictors are highly correlated with each other, and that there is also the problem that there are so many other influencing indicators missing that we filtered out in the beginning of the preprocessing.
+
+We see from that result that we cannot draw any conclusions about the influence of a single predictor on the CO2 emissions that we could generalize over multiple countries.
+
+
+# Comparison of Random Forest vs Linear Models
+```{r}
+
+rsquared <- data.frame(afr, as.numeric(rsquared_lm), as.numeric(rf_r2))
+names(rsquared) <- c("Country", "R2 Linear Model", "R2 Random Forest")
+
+knitr::kable(rsquared)
+
+```
+
+By only comparing the R2 values of the fitted Random Forest and Linear Models for the African Countries, we can see that the data can be fitted quite well. The only exception is Ethiopia, which has a higher variability in its data. The Linear Models perform better in all models except for Ethiopia, where the Random Forest model has a better R2 score. There was no separate test data used to compare the models, so they might be overfitted.
+
+# Linear Models over Time
+
+Going back to the `Adjusted net national income per capita (current US$)`. It is clear to see that the national income has been constant to 5 African countries. However we might notice that two countries do not follow this pattern. We will tease this factor apart by fitting a model with linear trends. The model captures constant national income and the residual will show what is left
+
+```{r fig.height=4, fig.width=10}
+net_income <- reshaped_african %>% 
+  ggplot(aes(Year, adj_net_national_income, color=country)) +
+  geom_line(alpha = 1/3) +
+  ggtitle("Yearly Adjusted Net National Income per Capita ")
+  
+net_income
+
+```
+
+Let us do simple linear model for a single country South afrifa.
+
+```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=10}
+library(modelr)
+library(gridExtra)
+south_africa <- filter(reshaped_african, country=="South Africa") 
+
+#full South African data
+full_data <- south_africa %>% 
+  ggplot(aes(Year, adj_net_national_income)) +
+  geom_line() +
+  ggtitle("Full data") 
+
+#Appling simple linear regression model to  south african data
+south_africa_lm <- lm(adj_net_national_income ~ Year, data = south_africa)
+linear <- south_africa %>% 
+  add_predictions(south_africa_lm) %>%
+  ggplot(aes(Year, pred)) +
+  geom_line() +
+  ggtitle("Linear Trend")
+
+# Residuals 
+remaining_pattern <- south_africa %>%
+  add_residuals(south_africa_lm) %>%
+  ggplot(aes(Year, resid)) +
+  geom_hline(yintercept = 0, color="white", size=3) +
+  geom_line() +
+  ggtitle("Remaining pattern")
+
+
+grid.arrange(full_data,linear,remaining_pattern, ncol = 3, nrow = 1)
+         
+```
+
+We now have a linear model but only for South African country. We will fit this model to other countries to see how the linear trend looks like. We need a new data structure to create a nested data frame. This creates a dataframe that has one row per group per country. By doing this, we can see then the  "GDP per capita (current US$)" across each countries. 
+
+```{r}
+by_country <- reshaped_african %>% 
+  group_by(country) %>%
+  nest()
+by_country$data[[1]]
+```
+
+We now have a nested dataframe we are now in a good position to fit the linear model  
+
+```{r}
+library(purrr)
+library(dplyr)
+#Model function 
+country_model <- function(reshaped_african){
+  lm(adj_net_national_income ~ Year, data = reshaped_african)
+}
+#str(by_country$data)
+
+#Apply model to every data frame. The dataframe is in a list so we can use map from purr package
+models <- map(by_country$data, country_model)
+
+#We create a new variable in by_country using mutate
+by_country <- by_country %>%
+  mutate(model = map(data, country_model))
+by_country
+```
+Add the residual to the dataset 
+
+```{r fig.height=4, fig.width=10, message=FALSE, warning=FALSE}
+by_country <- by_country %>%
+  mutate(resids= map2(data, model, add_residuals))
+
+resids <- unnest(by_country, resids)
+
+resids %>% 
+  ggplot(aes(Year, resid)) + 
+  geom_line(aes(group = country, color=country), alpha = 1/3) +
+  geom_smooth(se=FALSE) +
+  ggtitle("Adjusted net national income per capita (current US$) residuals per Year per Country ")
+
+```
+
+There is a large residuals which suggest that the model is not fitting so well. Instead of looking at the residuals from the model we could look at some general measurements of model quality in each country. 
+
+
+```{r message=FALSE, warning=FALSE}
+by_country <- by_country %>%
+  mutate(glance = map(model, broom::glance)) %>%
+  unnest(glance, .drop=T)
+by_country
+
+```
+
+with this data in hand we can start to look for models that do not fit 
+
+```{r message=FALSE, warning=FALSE,  fig.height=4, fig.width=10 }
+bad_fit <- filter(by_country, r.squared < 0.3)
+
+reshaped_african %>%
+  semi_join(bad_fit , by = "country") %>%
+  ggplot(aes(Year, adj_net_national_income , color= country)) +
+  geom_line()
+```
+
+Based on the results, Ghana  seems to be left out  from the rest of the African countries. It would be great if the world organization or so would give attention into them to better their economic life with respect to their income. It would also be good to see why Ghana has been left out from the rest. To do this, let us do a Multiple linear regression
+predicting "Adjusted net national income per capita (current US$)" based on the some of the available indicators 
+
+
+```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=8}
+
+ghana_data <- filter(reshaped_african, country=="Ghana")
+
+# fit multiple lm model gdp_per_cap
+ghana_linear_model <- lm( adj_net_national_income ~ agri_land  + household_consump_expend +  total_pop + rural_pop + adj_savings_per_cap , data = ghana_data)
+
+# plot coefficient 
+coefplot(ghana_linear_model) + 
+  ggtitle("Ghana Coef") +
+  ylab("Indicators") 
+
+
+```
+
+Of course the population has a big influence on the national net income as well as the agricultural land but this does not really tell us the factors affecting Ghana's economical income growth. For that to figure out we would need indicators such as national accounts, production , public finance and so on. So we take the analysis until here. 
+
+
+# Epilogue
+
+For this project, we took on the competition "United Nations Millennium Development Goals" hosted by DrivenData. The original data contains 195402 observations with 40 variables which includes economic data from 1972 to 2007 and 1305 economic indicators of 214 countries. For this project we preprocessed the data intensively leaving only 11 indicators and 6 countries.  
+
+With the help of the plots, we have some understanding of the dataset.  We have predicted carbon dioxide emission for each randomly selected African country using Random Forest and Linear regression model. Both models have explained the variability of the latter countries having approximately 60% to 99% R2. With the help of these models we have found out some indicators that have contributed to the African countries emitting co2. This could help us have an idea to ensure the environmental sustainibility. 
+
+A linear model has also been implemented to see how the economic stability of each countries in the aspect of "Adjusted Net National Income per capita" over time this could give us an idea for the development for a global partnership so other countries could attain a comfortable economic life. 
+
+There is so much in the dataset that could give us an idea to help for global development. But for this project we take it until here. 
+
+
+
+
